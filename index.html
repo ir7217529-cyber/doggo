@@ -28,7 +28,7 @@
       overflow-x:hidden;
     }
 
-    /* Фоновая легкая анимация лапок */
+    /* Лапки на фоне */
     .bg{
       position:fixed;
       inset:0;
@@ -60,7 +60,7 @@
       z-index:2;
     }
 
-    /* ШАПКА: фикс “съезжающего текста” */
+    /* Шапка (фикс съезжающего текста) */
     header{
       display:flex;
       align-items:flex-start;
@@ -70,7 +70,7 @@
     }
     .head-left{
       flex:1;
-      min-width:0; /* важно для ellipsis */
+      min-width:0;
     }
     h1{
       font-size:22px;
@@ -83,7 +83,7 @@
       font-size:12.5px;
       white-space:nowrap;
       overflow:hidden;
-      text-overflow:ellipsis; /* чтобы не уезжало */
+      text-overflow:ellipsis;
     }
     .chip{
       flex-shrink:0;
@@ -105,7 +105,7 @@
       backdrop-filter: blur(10px);
     }
 
-    /* СОБАКА ПО ЦЕНТРУ + тап */
+    /* Питомец */
     .pet-card{
       position:relative;
       padding: 12px;
@@ -122,13 +122,50 @@
       margin-bottom:10px;
     }
     .pet-title{
-      font-weight:800;
+      font-weight:900;
       font-size:14px;
       color:#fff;
     }
     .pet-hint{
       font-size:12px;
       color:var(--muted);
+      white-space:nowrap;
+    }
+
+    /* XP / Level */
+    .level-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:6px;
+    }
+    .lvl{
+      font-weight:900;
+      font-size:13px;
+      color:#fff;
+      white-space:nowrap;
+    }
+    .xptext{
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .xpbar{
+      width:100%;
+      height:10px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.10);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-top:8px;
+    }
+    .xpfill{
+      height:100%;
+      width:30%;
+      border-radius:999px;
+      background: rgba(255,255,255,0.85);
+      transition: width 220ms ease;
     }
 
     .pet-zone{
@@ -137,7 +174,6 @@
       justify-content:center;
       padding: 6px 0 2px;
     }
-
     .pet-btn{
       border: 0;
       background: transparent;
@@ -147,7 +183,6 @@
       outline: none;
       -webkit-tap-highlight-color: transparent;
     }
-
     .pet{
       font-size: 88px;
       line-height: 1;
@@ -156,13 +191,10 @@
       animation: pet-idle 2.8s ease-in-out infinite;
       user-select:none;
     }
-
     @keyframes pet-idle{
       0%,100% { transform: translateY(0) rotate(-1.5deg); }
       50%     { transform: translateY(-6px) rotate(1.5deg); }
     }
-
-    /* Реакция на тап */
     .pet.petted{
       animation: pet-pet 520ms ease-out 1;
     }
@@ -173,7 +205,6 @@
       100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
 
-    /* маленькие “сердечки” */
     .hearts{
       position:absolute;
       inset:0;
@@ -199,6 +230,7 @@
       100% { opacity:0; transform: translate(-50%,-120%) scale(1.0); }
     }
 
+    /* Статы */
     .stats{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -208,7 +240,6 @@
     @media (max-width: 420px){
       .stats{ grid-template-columns: 1fr; }
     }
-
     .stat{
       border: 1px solid var(--stroke);
       border-radius: 14px;
@@ -250,7 +281,7 @@
       transition: width 220ms ease;
     }
 
-    /* Кнопки (оставил компактные, как ты просил) */
+    /* Действия */
     .actions{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -272,30 +303,49 @@
       min-height: 58px;
       transition: transform 120ms ease;
     }
-    button.action:active{
-      transform: scale(0.98);
-    }
+    button.action:active{ transform: scale(0.98); }
+
+    /* ВАЖНО: фикс съезжающих колонок */
     .a-top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
+      min-width:0;
     }
     .a-title{
       display:flex;
       align-items:center;
       gap:10px;
       font-size:14.5px;
-      font-weight:800;
+      font-weight:900;
+      min-width:0;
+      flex:1;
     }
     .a-emoji{
       font-size:20px;
       line-height:1;
+      flex-shrink:0;
     }
+    .a-text{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .a-plus{
+      font-size:20px;
+      opacity:0.8;
+      flex-shrink:0;
+    }
+
     .a-hint{
       margin-top:6px;
       color:var(--muted);
       font-size:11.5px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
     .row{
@@ -315,6 +365,33 @@
     }
     .btn-mini:active{ transform: scale(0.98); }
 
+    /* Достижения */
+    .ach-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 420px){
+      .ach-grid{ grid-template-columns: 1fr; }
+    }
+    .ach{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.10);
+      border-radius: 12px;
+      padding: 10px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      opacity:0.6;
+    }
+    .ach.unlocked{ opacity:1; }
+    .ach-ico{ font-size:20px; line-height:1; margin-top:2px; }
+    .ach-body{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .ach-title{ font-size:13.5px; font-weight:900; }
+    .ach-desc{ font-size:11.5px; color:var(--muted); }
+
+    /* История */
     .history{
       display:flex;
       flex-direction:column;
@@ -338,25 +415,12 @@
       display:flex;
       gap:10px;
       align-items:flex-start;
+      min-width:0;
     }
-    .log-emoji{
-      font-size:20px;
-      line-height:1;
-      margin-top:1px;
-    }
-    .log-text{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-    }
-    .log-title{
-      font-size:13.5px;
-      font-weight:800;
-    }
-    .log-time{
-      font-size:11.5px;
-      color:var(--muted);
-    }
+    .log-emoji{ font-size:20px; line-height:1; margin-top:1px; flex-shrink:0; }
+    .log-text{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .log-title{ font-size:13.5px; font-weight:900; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .log-time{ font-size:11.5px; color:var(--muted); }
 
     .toast{
       position:fixed;
@@ -396,16 +460,22 @@
         <h1>Golden Care</h1>
         <div class="sub" id="sub">Загружаю профиль…</div>
       </div>
-      <div class="chip" id="chip">v1.1 • save</div>
+      <div class="chip" id="chip">v1.2 • save</div>
     </header>
 
     <div class="card">
-      <!-- Собака по центру -->
+      <!-- Пёс + уровень -->
       <div class="pet-card">
         <div class="pet-top">
           <div class="pet-title" id="petTitle">Пёсель</div>
           <div class="pet-hint">Тапай по нему 🐾</div>
         </div>
+
+        <div class="level-row">
+          <div class="lvl" id="lvl">Уровень 1</div>
+          <div class="xptext" id="xptext">0 / 100 XP</div>
+        </div>
+        <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
 
         <div class="pet-zone">
           <button class="pet-btn" onclick="petDog()" aria-label="Погладить собаку">
@@ -459,50 +529,50 @@
       <div class="actions">
         <button class="action" onclick="doAction('feed')">
           <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🍗</span> Покормить</div>
-            <div class="a-emoji">➕</div>
+            <div class="a-title"><span class="a-emoji">🍗</span><span class="a-text">Покормить</span></div>
+            <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Сытость +25 • Радость +6</div>
+          <div class="a-hint">Сытость +25 • Радость +6 • XP +12</div>
         </button>
 
         <button class="action" onclick="doAction('walk')">
           <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🦮</span> Погулять</div>
-            <div class="a-emoji">➕</div>
+            <div class="a-title"><span class="a-emoji">🦮</span><span class="a-text">Погулять</span></div>
+            <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Радость +18 • Энергия −10</div>
+          <div class="a-hint">Радость +18 • Энергия −10 • XP +14</div>
         </button>
 
         <button class="action" onclick="doAction('groom')">
           <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🧼</span> Вычесать</div>
-            <div class="a-emoji">➕</div>
+            <div class="a-title"><span class="a-emoji">🧼</span><span class="a-text">Вычесать</span></div>
+            <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Чистота +25 • Радость +4</div>
+          <div class="a-hint">Чистота +25 • Радость +4 • XP +10</div>
         </button>
 
         <button class="action" onclick="doAction('train')">
           <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🎾</span> Тренировка</div>
-            <div class="a-emoji">➕</div>
+            <div class="a-title"><span class="a-emoji">🎾</span><span class="a-text">Тренировка</span></div>
+            <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Радость +10 • Энергия −18</div>
+          <div class="a-hint">Радость +10 • Энергия −18 • XP +18</div>
         </button>
 
         <button class="action" onclick="doAction('rest')">
           <div class="a-top">
-            <div class="a-title"><span class="a-emoji">😴</span> Отдохнуть</div>
-            <div class="a-emoji">➕</div>
+            <div class="a-title"><span class="a-emoji">😴</span><span class="a-text">Отдохнуть</span></div>
+            <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Энергия +28</div>
+          <div class="a-hint">Энергия +28 • XP +8</div>
         </button>
 
         <button class="action" onclick="doAction('treat')">
           <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🦴</span> Лакомство</div>
-            <div class="a-emoji">➕</div>
+            <div class="a-title"><span class="a-emoji">🦴</span><span class="a-text">Лакомство</span></div>
+            <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Радость +16 • Сытость +8</div>
+          <div class="a-hint">Радость +16 • Сытость +8 • XP +9</div>
         </button>
       </div>
 
@@ -513,10 +583,20 @@
       </div>
     </div>
 
+    <!-- Достижения -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div style="font-weight:900;">Достижения</div>
+        <div style="color:var(--muted);font-size:12px;" id="saveMode">—</div>
+      </div>
+      <div class="ach-grid" id="achGrid"></div>
+    </div>
+
+    <!-- История -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">История</div>
-        <div style="color:var(--muted);font-size:12px;" id="saveMode">—</div>
+        <div style="color:var(--muted);font-size:12px;">Сохраняется</div>
       </div>
       <div class="history" id="history"></div>
     </div>
@@ -547,17 +627,12 @@
       const t = el('toast');
       t.textContent = msg;
       t.classList.add('show');
-      setTimeout(()=>t.classList.remove('show'), 1100);
+      setTimeout(()=>t.classList.remove('show'), 1150);
     }
 
-    // ---------- Storage (Telegram CloudStorage -> fallback localStorage) ----------
-    const KEY = 'golden_care_state_v1_1';
+    // ---------- Storage ----------
+    const KEY = 'golden_care_state_v1_2';
     const canCloud = !!(tg && tg.CloudStorage && typeof tg.CloudStorage.getItem === 'function');
-
-    function setSaveModeText(){
-      el('saveMode').textContent = canCloud ? 'Сохраняю в Telegram' : 'Сохраняю на устройстве';
-      el('chip').textContent = canCloud ? 'v1.1 • Telegram save' : 'v1.1 • device save';
-    }
 
     function loadStateLocal(){
       const raw = localStorage.getItem(KEY);
@@ -581,12 +656,98 @@
       });
     }
 
-    // ---------- Game state ----------
+    async function persist(){
+      if (canCloud) await saveStateCloud(state);
+      else saveStateLocal(state);
+    }
+
+    // ---------- Game / XP ----------
+    function xpNeeded(level){
+      // плавный рост
+      return Math.round(100 + (level - 1) * 35);
+    }
+
+    function addXP(amount){
+      state.xp += amount;
+      let leveled = false;
+
+      while (state.xp >= xpNeeded(state.level)){
+        state.xp -= xpNeeded(state.level);
+        state.level += 1;
+        leveled = true;
+      }
+
+      if (leveled){
+        tg?.HapticFeedback?.notificationOccurred?.("success");
+        toast(`🎉 Новый уровень: ${state.level}!`);
+        addLog("🎉", `Новый уровень ${state.level}`);
+      }
+    }
+
+    // ---------- Achievements ----------
+    const ACHS = [
+      { id:"first_action", ico:"🏁", title:"Первый шаг", desc:"Сделай любое действие 1 раз" },
+      { id:"pet_10", ico:"💛", title:"Ласковый", desc:"Погладь пёселя 10 раз" },
+      { id:"feed_10", ico:"🍗", title:"Шеф-повар", desc:"Покорми 10 раз" },
+      { id:"walk_10", ico:"🦮", title:"Прогулочник", desc:"Погуляй 10 раз" },
+      { id:"train_10", ico:"🎾", title:"Тренер", desc:"Потренируйся 10 раз" },
+      { id:"clean_10", ico:"🧼", title:"Груминг-мастер", desc:"Вычесай 10 раз" },
+      { id:"level_5", ico:"⭐", title:"Пятый уровень", desc:"Достигни уровня 5" },
+      { id:"full_happy", ico:"😁", title:"Счастливчик", desc:"Подними радость до 100%" },
+    ];
+
+    function unlock(id){
+      if (state.unlocked[id]) return;
+      state.unlocked[id] = true;
+      tg?.HapticFeedback?.notificationOccurred?.("success");
+      toast("🏆 Достижение!");
+      addLog("🏆", `Достижение: ${ACHS.find(a=>a.id===id)?.title || id}`);
+    }
+
+    function checkAchievements(){
+      const c = state.counts;
+      const s = state.stats;
+
+      const anyAction = c.feed + c.walk + c.groom + c.train + c.rest + c.treat + c.pet;
+      if (anyAction >= 1) unlock("first_action");
+
+      if (c.pet >= 10) unlock("pet_10");
+      if (c.feed >= 10) unlock("feed_10");
+      if (c.walk >= 10) unlock("walk_10");
+      if (c.train >= 10) unlock("train_10");
+      if (c.groom >= 10) unlock("clean_10");
+
+      if (state.level >= 5) unlock("level_5");
+      if (Math.round(s.happy) >= 100) unlock("full_happy");
+    }
+
+    function renderAchievements(){
+      const grid = el("achGrid");
+      grid.innerHTML = "";
+      ACHS.forEach(a => {
+        const div = document.createElement("div");
+        div.className = "ach" + (state.unlocked[a.id] ? " unlocked" : "");
+        div.innerHTML = `
+          <div class="ach-ico">${a.ico}</div>
+          <div class="ach-body">
+            <div class="ach-title">${a.title}</div>
+            <div class="ach-desc">${a.desc}</div>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+    }
+
+    // ---------- State ----------
     const DEFAULT = {
       dogName: "Голден",
       stats: { hunger: 78, happy: 70, clean: 65, energy: 72 },
       history: [],
-      lastTick: now()
+      lastTick: now(),
+      level: 1,
+      xp: 0,
+      unlocked: {},
+      counts: { feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 }
     };
 
     let state = structuredClone(DEFAULT);
@@ -596,7 +757,6 @@
       const dtMin = Math.max(0, (t - (state.lastTick || t)) / 60000);
       state.lastTick = t;
 
-      // спад в минуту
       state.stats.hunger = clamp(state.stats.hunger - dtMin * 0.9);
       state.stats.happy  = clamp(state.stats.happy  - dtMin * 0.45);
       state.stats.clean  = clamp(state.stats.clean  - dtMin * 0.35);
@@ -605,23 +765,19 @@
 
     function addLog(emoji, title){
       state.history.unshift({ emoji, title, ts: now() });
-      state.history = state.history.slice(0, 50);
+      state.history = state.history.slice(0, 60);
     }
 
     const ACTIONS = {
-      feed:  { emoji:"🍗", title:"Покормил",  delta:{ hunger:+25, happy:+6,  clean:0,   energy:0 } },
-      walk:  { emoji:"🦮", title:"Погулял",   delta:{ hunger:-6,  happy:+18, clean:-3,  energy:-10 } },
-      groom: { emoji:"🧼", title:"Вычесал",   delta:{ hunger:0,   happy:+4,  clean:+25, energy:-3 } },
-      train: { emoji:"🎾", title:"Тренировка",delta:{ hunger:-8,  happy:+10, clean:-2,  energy:-18 } },
-      rest:  { emoji:"😴", title:"Отдохнул",  delta:{ hunger:-2,  happy:+2,  clean:0,   energy:+28 } },
-      treat: { emoji:"🦴", title:"Лакомство", delta:{ hunger:+8,  happy:+16, clean:0,   energy:0 } },
+      feed:  { emoji:"🍗", title:"Покормил",   xp:12, delta:{ hunger:+25, happy:+6,  clean:0,   energy:0 } },
+      walk:  { emoji:"🦮", title:"Погулял",    xp:14, delta:{ hunger:-6,  happy:+18, clean:-3,  energy:-10 } },
+      groom: { emoji:"🧼", title:"Вычесал",    xp:10, delta:{ hunger:0,   happy:+4,  clean:+25, energy:-3 } },
+      train: { emoji:"🎾", title:"Тренировка", xp:18, delta:{ hunger:-8,  happy:+10, clean:-2,  energy:-18 } },
+      rest:  { emoji:"😴", title:"Отдохнул",   xp:8,  delta:{ hunger:-2,  happy:+2,  clean:0,   energy:+28 } },
+      treat: { emoji:"🦴", title:"Лакомство",  xp:9,  delta:{ hunger:+8,  happy:+16, clean:0,   energy:0 } },
     };
 
-    async function persist(){
-      if (canCloud) await saveStateCloud(state);
-      else saveStateLocal(state);
-    }
-
+    // ---------- Render ----------
     function render(){
       const s = state.stats;
 
@@ -629,7 +785,6 @@
         el('v_' + name).textContent = Math.round(val) + "%";
         el('b_' + name).style.width = clamp(val) + "%";
       };
-
       setBar('hunger', s.hunger);
       setBar('happy', s.happy);
       setBar('clean', s.clean);
@@ -638,35 +793,47 @@
       const who = tg?.initDataUnsafe?.user;
       const uname = who?.first_name ? `${who.first_name}${who.username ? " @" + who.username : ""}` : "в Telegram";
       el('sub').textContent = `Питомец: ${state.dogName} • пользователь: ${uname}`;
-
       el('petTitle').textContent = state.dogName;
 
+      // Save chip
+      el('saveMode').textContent = canCloud ? "Сохраняю в Telegram" : "Сохраняю на устройстве";
+      el('chip').textContent = canCloud ? "v1.2 • Telegram save" : "v1.2 • device save";
+
+      // XP/Level
+      el("lvl").textContent = `Уровень ${state.level}`;
+      const need = xpNeeded(state.level);
+      el("xptext").textContent = `${Math.round(state.xp)} / ${need} XP`;
+      el("xpfill").style.width = clamp((state.xp / need) * 100) + "%";
+
+      // Achievements
+      renderAchievements();
+
+      // History
       const list = el('history');
       list.innerHTML = "";
       if (!state.history.length){
         list.innerHTML = `<div style="color:var(--muted);font-size:13px;padding:6px 2px;">Пока пусто. Нажми любую кнопку 🙂</div>`;
-        return;
-      }
-      state.history.forEach(item => {
-        const row = document.createElement('div');
-        row.className = 'log';
-        row.innerHTML = `
-          <div class="log-left">
-            <div class="log-emoji">${item.emoji}</div>
-            <div class="log-text">
-              <div class="log-title">${item.title}</div>
-              <div class="log-time">${fmtTime(item.ts)}</div>
+      } else {
+        state.history.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'log';
+          row.innerHTML = `
+            <div class="log-left">
+              <div class="log-emoji">${item.emoji}</div>
+              <div class="log-text">
+                <div class="log-title">${item.title}</div>
+                <div class="log-time">${fmtTime(item.ts)}</div>
+              </div>
             </div>
-          </div>
-        `;
-        list.appendChild(row);
-      });
+          `;
+          list.appendChild(row);
+        });
+      }
     }
 
     // ---------- Actions ----------
     window.doAction = async function(key){
       applyDecay();
-
       const a = ACTIONS[key];
       if (!a) return;
 
@@ -675,44 +842,47 @@
       state.stats.clean  = clamp(state.stats.clean  + (a.delta.clean  || 0));
       state.stats.energy = clamp(state.stats.energy + (a.delta.energy || 0));
 
+      state.counts[key] = (state.counts[key] || 0) + 1;
+
       addLog(a.emoji, a.title);
+      addXP(a.xp);
 
       tg?.HapticFeedback?.impactOccurred?.("light");
 
       if (state.stats.hunger < 15) toast("Он голодный 😭");
       else if (state.stats.energy < 15) toast("Он устал 😴");
-      else toast(`${a.emoji} ${a.title}!`);
+      else toast(`${a.emoji} ${a.title}! +${a.xp}XP`);
 
+      checkAchievements();
       await persist();
       render();
     }
 
-    // ---------- Pet the dog ----------
+    // Погладить
     window.petDog = async function(){
       applyDecay();
 
-      // маленький бонус за погладить
       state.stats.happy = clamp(state.stats.happy + 3);
       state.stats.energy = clamp(state.stats.energy + 1);
 
-      addLog("🐶", "Погладил пёселя");
+      state.counts.pet += 1;
 
-      // анимация
+      addLog("🐶", "Погладил пёселя");
+      addXP(4);
+
       const pet = el('petDog');
       pet.classList.remove('petted');
-      void pet.offsetWidth; // reflow
+      void pet.offsetWidth;
       pet.classList.add('petted');
 
-      // сердечки
       const hearts = el('hearts');
       hearts.classList.add('show');
       setTimeout(()=>hearts.classList.remove('show'), 750);
 
-      // Telegram фидбек
       tg?.HapticFeedback?.impactOccurred?.("medium");
+      toast("💛 Ему приятно! +4XP");
 
-      toast("💛 Ему приятно!");
-
+      checkAchievements();
       await persist();
       render();
     }
@@ -728,7 +898,7 @@
     }
 
     window.resetAll = async function(){
-      if (!confirm("Сбросить всё? История и показатели обнулятся.")) return;
+      if (!confirm("Сбросить всё? История, XP и достижения обнулятся.")) return;
       state = structuredClone(DEFAULT);
       await persist();
       render();
@@ -737,26 +907,39 @@
 
     window.share = function(){
       const s = state.stats;
-      const msg = `🐶 ${state.dogName}\n🍗 Сытость: ${Math.round(s.hunger)}%\n😊 Радость: ${Math.round(s.happy)}%\n🧼 Чистота: ${Math.round(s.clean)}%\n⚡ Энергия: ${Math.round(s.energy)}%`;
+      const msg =
+`🐶 ${state.dogName}
+⭐ Уровень: ${state.level}
+🍗 Сытость: ${Math.round(s.hunger)}%
+😊 Радость: ${Math.round(s.happy)}%
+🧼 Чистота: ${Math.round(s.clean)}%
+⚡ Энергия: ${Math.round(s.energy)}%`;
       tg?.showPopup?.({ title: "Поделиться", message: msg, buttons: [{type:"ok"}] }) || alert(msg);
     }
 
     // ---------- Boot ----------
     async function boot(){
-      setSaveModeText();
-
       let loaded = null;
       if (canCloud) loaded = await loadStateCloud();
       if (!loaded) loaded = loadStateLocal();
 
       state = loaded ? loaded : structuredClone(DEFAULT);
 
+      // миграция на случай старых сохранений
+      state.level ??= 1;
+      state.xp ??= 0;
+      state.unlocked ??= {};
+      state.counts ??= { feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 };
+
       applyDecay();
+      checkAchievements();
       await persist();
       render();
 
+      // тик каждые 10 сек
       setInterval(async () => {
         applyDecay();
+        checkAchievements();
         await persist();
         render();
       }, 10000);
@@ -766,5 +949,6 @@
   </script>
 </body>
 </html>
+
 
 
