@@ -8,131 +8,627 @@
 
   <style>
     :root{
-      --bg:#0f0f12;
-      --card:#1f1f26;
+      --bg1:#0b0b10;
+      --bg2:#12121a;
+      --card: rgba(31,31,38,0.92);
+      --stroke: rgba(255,255,255,0.08);
       --text:#ffffff;
       --muted:#a7a7b3;
-      --radius:20px;
+      --radius:16px;
     }
 
     *{box-sizing:border-box}
-
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:var(--bg);
       color:var(--text);
+      background: radial-gradient(900px 500px at 20% 10%, #1b1b28 0%, transparent 60%),
+                  radial-gradient(900px 500px at 80% 20%, #23233a 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
     }
 
     .wrap{
       max-width:720px;
       margin:0 auto;
-      padding:18px 16px calc(18px + env(safe-area-inset-bottom));
+      padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+      position:relative;
+      z-index:2;
     }
 
+    /* Фоновая анимация: пес + лапки */
+    .bg{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+      opacity:0.55;
+    }
+    .dog{
+      position:absolute;
+      left: 12px;
+      bottom: 18px;
+      font-size: 64px;
+      filter: drop-shadow(0 10px 25px rgba(0,0,0,0.45));
+      animation: dog-bounce 2.4s ease-in-out infinite;
+      transform-origin: 50% 100%;
+    }
+    .paw{
+      position:absolute;
+      right:-40px;
+      top: 20%;
+      font-size: 22px;
+      opacity:0.18;
+      animation: paw-drift 9s linear infinite;
+    }
+    .paw:nth-child(2){ top: 35%; animation-duration: 11s; font-size: 20px; opacity:0.14; }
+    .paw:nth-child(3){ top: 55%; animation-duration: 13s; font-size: 24px; opacity:0.16; }
+    .paw:nth-child(4){ top: 70%; animation-duration: 10s; font-size: 21px; opacity:0.12; }
+
+    @keyframes dog-bounce{
+      0%,100% { transform: translateY(0) rotate(-2deg); }
+      50%     { transform: translateY(-10px) rotate(2deg); }
+    }
+    @keyframes paw-drift{
+      0%   { transform: translateX(0) rotate(-10deg); }
+      100% { transform: translateX(-120vw) rotate(10deg); }
+    }
+
+    header{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:8px;
+    }
     h1{
-      font-size:26px;
-      margin:10px 0 6px;
+      font-size:22px;
+      margin:0;
+      line-height:1.1;
     }
-
     .sub{
+      margin-top:4px;
       color:var(--muted);
-      margin:0 0 18px;
-      font-size:14px;
+      font-size:12.5px;
     }
 
-    .grid{
+    .chip{
+      padding:8px 10px;
+      border:1px solid var(--stroke);
+      border-radius:999px;
+      background: rgba(0,0,0,0.18);
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .card{
+      margin-top:12px;
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      padding: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .stats{
       display:grid;
-      grid-template-columns:1fr;
-      gap:14px;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 420px){
+      .stats{ grid-template-columns: 1fr; }
     }
 
-    button{
+    .stat{
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      padding: 10px;
+      background: rgba(0,0,0,0.10);
+    }
+    .stat-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+      font-size:12.5px;
+    }
+    .stat-name{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color: var(--muted);
+    }
+    .stat-val{
+      font-variant-numeric: tabular-nums;
+      color: #fff;
+      opacity:0.9;
+    }
+    .bar{
       width:100%;
-      border:0;
-      border-radius:var(--radius);
-      padding:18px 18px;
-      background:var(--card);
-      color:var(--text);
-      font-size:18px;
-      font-weight:600;
+      height:10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .fill{
+      height:100%;
+      width:50%;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.85);
+      transform-origin:left center;
+      transition: width 220ms ease;
+    }
+
+    /* Кнопки меньше */
+    .actions{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width: 360px){
+      .actions{ grid-template-columns: 1fr; }
+    }
+    button.action{
+      width:100%;
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 12px 12px;
+      background: rgba(0,0,0,0.18);
+      color: var(--text);
       text-align:left;
       cursor:pointer;
-      min-height:90px;
-      transition:0.1s;
+      min-height: 58px;
+      transition: transform 120ms ease, background 120ms ease;
     }
-
-    button:active{
-      transform:scale(0.98);
+    button.action:active{
+      transform: scale(0.98);
     }
-
-    .emoji{
-      font-size:36px;   /* 👈 СРЕДНИЙ размер */
-      display:block;
-      margin-bottom:8px;
+    .a-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .a-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:14.5px;
+      font-weight:700;
+    }
+    .a-emoji{
+      font-size:22px; /* меньше иконки */
       line-height:1;
     }
-
-    .label{
-      display:block;
-      font-size:18px;
+    .a-hint{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:11.5px;
     }
 
-    .footer{
-      margin-top:20px;
-      font-size:13px;
+    .row{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      flex-wrap:wrap;
+    }
+    .btn-mini{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.18);
       color:var(--muted);
-      text-align:center;
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .btn-mini:active{ transform: scale(0.98); }
+
+    .history{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:10px;
+      max-height: 260px;
+      overflow:auto;
+      padding-right:2px;
+    }
+    .log{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.10);
+      border-radius: 12px;
+      padding: 10px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .log-left{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .log-emoji{
+      font-size:20px;
+      line-height:1;
+      margin-top:1px;
+    }
+    .log-text{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .log-title{
+      font-size:13.5px;
+      font-weight:700;
+    }
+    .log-time{
+      font-size:11.5px;
+      color:var(--muted);
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,255,255,0.12);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:12.5px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index:3;
+      backdrop-filter: blur(8px);
+    }
+    .toast.show{
+      opacity:1;
+      transform: translateX(-50%) translateY(-6px);
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-
-    <h1>Golden Care 🐶</h1>
-    <div class="sub">Уход за твоим голденом</div>
-
-    <div class="grid">
-
-      <button onclick="tap('🍗 Покормил')">
-        <span class="emoji">🍗</span>
-        <span class="label">Покормить</span>
-      </button>
-
-      <button onclick="tap('🦮 Погулял')">
-        <span class="emoji">🦮</span>
-        <span class="label">Погулять</span>
-      </button>
-
-      <button onclick="tap('🧼 Вычесал')">
-        <span class="emoji">🧼</span>
-        <span class="label">Вычесать</span>
-      </button>
-
-      <button onclick="tap('🎾 Тренировка')">
-        <span class="emoji">🎾</span>
-        <span class="label">Тренировка</span>
-      </button>
-
-    </div>
-
-    <div class="footer">
-      Golden Care 🐾
-    </div>
-
+  <div class="bg">
+    <div class="dog">🐶</div>
+    <div class="paw">🐾</div>
+    <div class="paw">🐾</div>
+    <div class="paw">🐾</div>
+    <div class="paw">🐾</div>
   </div>
+
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Golden Care</h1>
+        <div class="sub" id="sub">Загружаю профиль…</div>
+      </div>
+      <div class="chip" id="chip">v1.0 • сохранение</div>
+    </header>
+
+    <div class="card">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-name">🍗 Сытость</div>
+            <div class="stat-val" id="v_hunger">—</div>
+          </div>
+          <div class="bar"><div class="fill" id="b_hunger"></div></div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-name">😊 Радость</div>
+            <div class="stat-val" id="v_happy">—</div>
+          </div>
+          <div class="bar"><div class="fill" id="b_happy"></div></div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-name">🧼 Чистота</div>
+            <div class="stat-val" id="v_clean">—</div>
+          </div>
+          <div class="bar"><div class="fill" id="b_clean"></div></div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-name">⚡ Энергия</div>
+            <div class="stat-val" id="v_energy">—</div>
+          </div>
+          <div class="bar"><div class="fill" id="b_energy"></div></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="action" onclick="doAction('feed')">
+          <div class="a-top">
+            <div class="a-title"><span class="a-emoji">🍗</span> Покормить</div>
+            <div class="a-emoji">➕</div>
+          </div>
+          <div class="a-hint">Сытость +25 • Радость +6</div>
+        </button>
+
+        <button class="action" onclick="doAction('walk')">
+          <div class="a-top">
+            <div class="a-title"><span class="a-emoji">🦮</span> Погулять</div>
+            <div class="a-emoji">➕</div>
+          </div>
+          <div class="a-hint">Радость +18 • Энергия −10</div>
+        </button>
+
+        <button class="action" onclick="doAction('groom')">
+          <div class="a-top">
+            <div class="a-title"><span class="a-emoji">🧼</span> Вычесать</div>
+            <div class="a-emoji">➕</div>
+          </div>
+          <div class="a-hint">Чистота +25 • Радость +4</div>
+        </button>
+
+        <button class="action" onclick="doAction('train')">
+          <div class="a-top">
+            <div class="a-title"><span class="a-emoji">🎾</span> Тренировка</div>
+            <div class="a-emoji">➕</div>
+          </div>
+          <div class="a-hint">Радость +10 • Энергия −18</div>
+        </button>
+
+        <button class="action" onclick="doAction('rest')">
+          <div class="a-top">
+            <div class="a-title"><span class="a-emoji">😴</span> Отдохнуть</div>
+            <div class="a-emoji">➕</div>
+          </div>
+          <div class="a-hint">Энергия +28</div>
+        </button>
+
+        <button class="action" onclick="doAction('treat')">
+          <div class="a-top">
+            <div class="a-title"><span class="a-emoji">🦴</span> Лакомство</div>
+            <div class="a-emoji">➕</div>
+          </div>
+          <div class="a-hint">Радость +16 • Сытость +8</div>
+        </button>
+      </div>
+
+      <div class="row">
+        <button class="btn-mini" onclick="renameDog()">✏️ Имя</button>
+        <button class="btn-mini" onclick="resetAll()">🗑 Сброс</button>
+        <button class="btn-mini" onclick="share()">📤 Поделиться</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div style="font-weight:800;">История</div>
+        <div style="color:var(--muted);font-size:12px;" id="saveMode">—</div>
+      </div>
+      <div class="history" id="history"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">OK</div>
 
   <script>
     const tg = window.Telegram?.WebApp;
     if (tg) tg.ready();
 
-    function tap(text){
-      tg?.HapticFeedback?.impactOccurred?.("light");
-      alert(text);
-    }
-  </script>
+    // ---------- Helpers ----------
+    const clamp = (n, a=0, b=100) => Math.max(a, Math.min(b, n));
+    const now = () => Date.now();
 
+    function fmtTime(ts){
+      try{
+        const d = new Date(ts);
+        return d.toLocaleString(undefined, { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
+      }catch{
+        return '';
+      }
+    }
+
+    const el = (id) => document.getElementById(id);
+
+    function toast(msg){
+      const t = el('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 1100);
+    }
+
+    // ---------- Storage (Telegram CloudStorage -> fallback localStorage) ----------
+    const KEY = 'golden_care_state_v1';
+    const canCloud = !!(tg && tg.CloudStorage && typeof tg.CloudStorage.getItem === 'function');
+
+    function setSaveModeText(){
+      el('saveMode').textContent = canCloud ? 'Сохраняю в Telegram' : 'Сохраняю на устройстве';
+      el('chip').textContent = canCloud ? 'v1.0 • Telegram save' : 'v1.0 • device save';
+    }
+
+    function loadStateLocal(){
+      const raw = localStorage.getItem(KEY);
+      return raw ? JSON.parse(raw) : null;
+    }
+    function saveStateLocal(state){
+      localStorage.setItem(KEY, JSON.stringify(state));
+    }
+
+    function loadStateCloud(){
+      return new Promise((resolve) => {
+        tg.CloudStorage.getItem(KEY, (err, value) => {
+          if (err || !value) return resolve(null);
+          try{ resolve(JSON.parse(value)); } catch { resolve(null); }
+        });
+      });
+    }
+    function saveStateCloud(state){
+      return new Promise((resolve) => {
+        tg.CloudStorage.setItem(KEY, JSON.stringify(state), () => resolve(true));
+      });
+    }
+
+    // ---------- Game state ----------
+    const DEFAULT = {
+      dogName: "Голден",
+      stats: { hunger: 78, happy: 70, clean: 65, energy: 72 },
+      history: [],
+      lastTick: now()
+    };
+
+    let state = structuredClone(DEFAULT);
+
+    function applyDecay(){
+      const t = now();
+      const dtMin = Math.max(0, (t - (state.lastTick || t)) / 60000); // minutes
+      state.lastTick = t;
+
+      // Падение в минуту (можно потом подкрутить)
+      state.stats.hunger = clamp(state.stats.hunger - dtMin * 0.9);
+      state.stats.happy  = clamp(state.stats.happy  - dtMin * 0.45);
+      state.stats.clean  = clamp(state.stats.clean  - dtMin * 0.35);
+      state.stats.energy = clamp(state.stats.energy - dtMin * 0.70);
+    }
+
+    function addLog(emoji, title){
+      state.history.unshift({ emoji, title, ts: now() });
+      state.history = state.history.slice(0, 50);
+    }
+
+    const ACTIONS = {
+      feed:  { emoji:"🍗", title:"Покормил",  delta:{ hunger:+25, happy:+6,  clean:0,   energy:0 } },
+      walk:  { emoji:"🦮", title:"Погулял",   delta:{ hunger:-6,  happy:+18, clean:-3,  energy:-10 } },
+      groom: { emoji:"🧼", title:"Вычесал",   delta:{ hunger:0,   happy:+4,  clean:+25, energy:-3 } },
+      train: { emoji:"🎾", title:"Тренировка",delta:{ hunger:-8,  happy:+10, clean:-2,  energy:-18 } },
+      rest:  { emoji:"😴", title:"Отдохнул",  delta:{ hunger:-2,  happy:+2,  clean:0,   energy:+28 } },
+      treat: { emoji:"🦴", title:"Лакомство", delta:{ hunger:+8,  happy:+16, clean:0,   energy:0 } },
+    };
+
+    async function persist(){
+      if (canCloud) await saveStateCloud(state);
+      else saveStateLocal(state);
+    }
+
+    function render(){
+      const s = state.stats;
+
+      const setBar = (name, val) => {
+        el('v_' + name).textContent = Math.round(val) + "%";
+        el('b_' + name).style.width = clamp(val) + "%";
+      };
+
+      setBar('hunger', s.hunger);
+      setBar('happy', s.happy);
+      setBar('clean', s.clean);
+      setBar('energy', s.energy);
+
+      const who = tg?.initDataUnsafe?.user;
+      const uname = who?.first_name ? `${who.first_name}${who.username ? " @" + who.username : ""}` : "в Telegram";
+      el('sub').textContent = `Питомец: ${state.dogName} • пользователь: ${uname}`;
+
+      const list = el('history');
+      list.innerHTML = "";
+      if (!state.history.length){
+        list.innerHTML = `<div style="color:var(--muted);font-size:13px;padding:6px 2px;">Пока пусто. Нажми любую кнопку 🙂</div>`;
+        return;
+      }
+      state.history.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'log';
+        row.innerHTML = `
+          <div class="log-left">
+            <div class="log-emoji">${item.emoji}</div>
+            <div class="log-text">
+              <div class="log-title">${item.title}</div>
+              <div class="log-time">${fmtTime(item.ts)}</div>
+            </div>
+          </div>
+        `;
+        list.appendChild(row);
+      });
+    }
+
+    // ---------- Actions ----------
+    window.doAction = async function(key){
+      applyDecay();
+
+      const a = ACTIONS[key];
+      if (!a) return;
+
+      // Применяем изменения
+      state.stats.hunger = clamp(state.stats.hunger + (a.delta.hunger || 0));
+      state.stats.happy  = clamp(state.stats.happy  + (a.delta.happy  || 0));
+      state.stats.clean  = clamp(state.stats.clean  + (a.delta.clean  || 0));
+      state.stats.energy = clamp(state.stats.energy + (a.delta.energy || 0));
+
+      addLog(a.emoji, a.title);
+
+      // Telegram приятности
+      tg?.HapticFeedback?.impactOccurred?.("light");
+
+      // Сообщение если прям плохо
+      if (state.stats.hunger < 15) toast("Он голодный 😭");
+      else if (state.stats.energy < 15) toast("Он устал 😴");
+      else toast(`${a.emoji} ${a.title}!`);
+
+      await persist();
+      render();
+    }
+
+    window.renameDog = async function(){
+      const name = prompt("Как назовём пёселя? 😄", state.dogName);
+      if (!name) return;
+      state.dogName = name.slice(0, 18);
+      addLog("✏️", `Имя: ${state.dogName}`);
+      await persist();
+      render();
+      toast("Имя обновил ✅");
+    }
+
+    window.resetAll = async function(){
+      if (!confirm("Сбросить всё? История и показатели обнулятся.")) return;
+      state = structuredClone(DEFAULT);
+      await persist();
+      render();
+      toast("Сбросил 🗑");
+    }
+
+    window.share = function(){
+      const s = state.stats;
+      const msg = `🐶 ${state.dogName}\n🍗 Сытость: ${Math.round(s.hunger)}%\n😊 Радость: ${Math.round(s.happy)}%\n🧼 Чистота: ${Math.round(s.clean)}%\n⚡ Энергия: ${Math.round(s.energy)}%`;
+      tg?.showPopup?.({ title: "Поделиться", message: msg, buttons: [{type:"ok"}] }) || alert(msg);
+    }
+
+    // ---------- Boot ----------
+    async function boot(){
+      setSaveModeText();
+
+      let loaded = null;
+      if (canCloud) loaded = await loadStateCloud();
+      if (!loaded) loaded = loadStateLocal();
+
+      state = loaded ? loaded : structuredClone(DEFAULT);
+
+      // если сохранение старое — применим спад
+      applyDecay();
+      await persist();
+      render();
+
+      // тикаем раз в 10 сек: визуально и по игре
+      setInterval(async () => {
+        applyDecay();
+        await persist();
+        render();
+      }, 10000);
+    }
+
+    boot();
+  </script>
 </body>
 </html>
+
 
