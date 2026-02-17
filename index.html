@@ -12,7 +12,7 @@
       --card:#1f1f26;
       --text:#ffffff;
       --muted:#a7a7b3;
-      --radius:22px;
+      --radius:20px;
     }
 
     *{box-sizing:border-box}
@@ -20,45 +20,45 @@
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: var(--bg);
-      color: var(--text);
+      background:var(--bg);
+      color:var(--text);
     }
 
     .wrap{
       max-width:720px;
       margin:0 auto;
-      padding:20px 16px calc(20px + env(safe-area-inset-bottom));
+      padding:18px 16px calc(18px + env(safe-area-inset-bottom));
     }
 
     h1{
-      font-size:28px;
+      font-size:26px;
       margin:10px 0 6px;
     }
 
     .sub{
       color:var(--muted);
-      margin:0 0 20px;
-      font-size:15px;
+      margin:0 0 18px;
+      font-size:14px;
     }
 
     .grid{
       display:grid;
-      grid-template-columns:1fr; /* ОДНА кнопка в ряд */
-      gap:16px;
+      grid-template-columns:1fr;
+      gap:14px;
     }
 
     button{
       width:100%;
       border:0;
       border-radius:var(--radius);
-      padding:22px 20px;
+      padding:18px 18px;
       background:var(--card);
       color:var(--text);
-      font-size:20px;
-      font-weight:700;
+      font-size:18px;
+      font-weight:600;
       text-align:left;
       cursor:pointer;
-      min-height:110px;
+      min-height:90px;
       transition:0.1s;
     }
 
@@ -67,19 +67,19 @@
     }
 
     .emoji{
-      font-size:52px;  /* БОЛЬШИЕ иконки */
+      font-size:36px;   /* 👈 СРЕДНИЙ размер */
       display:block;
-      margin-bottom:12px;
+      margin-bottom:8px;
       line-height:1;
     }
 
     .label{
       display:block;
-      font-size:20px;
+      font-size:18px;
     }
 
     .footer{
-      margin-top:25px;
+      margin-top:20px;
       font-size:13px;
       color:var(--muted);
       text-align:center;
@@ -118,7 +118,7 @@
     </div>
 
     <div class="footer">
-      Golden Care v2 🐾
+      Golden Care 🐾
     </div>
 
   </div>
