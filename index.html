@@ -1,36 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Голден</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Golden Care</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    body {
-      font-family: Arial;
-      background: #0f0f12;
-      color: white;
-      text-align: center;
-      padding: 40px;
+    :root{
+      --bg:#0f0f12;
+      --card:#1f1f26;
+      --text:#ffffff;
+      --muted:#a7a7b3;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+    }
+    h1{
+      margin: 10px 0 6px;
+      font-size: 26px;
+      line-height: 1.15;
+    }
+    .sub{
+      color: var(--muted);
+      margin: 0 0 14px;
+      font-size: 14px;
     }
 
-    button {
-      padding: 15px;
-      margin: 10px;
-      border-radius: 10px;
-      border: none;
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button{
+      width:100%;
+      border:0;
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      background: var(--card);
+      color: var(--text);
       font-size: 16px;
-      background: #1f1f26;
-      color: white;
+      font-weight: 600;
+      text-align:left;
+      cursor:pointer;
+      min-height: 70px;           /* удобнее пальцем */
+    }
+    button:active{transform: scale(0.99);}
+
+    .emoji{
+      font-size: 28px;            /* ВОТ тут иконки увеличили */
+      display:block;
+      margin-bottom: 8px;
+    }
+    .label{
+      display:block;
+      font-size: 16px;
+    }
+    .hint{
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* на очень узких экранах — по одной кнопке в ряд */
+    @media (max-width: 360px){
+      .grid{ grid-template-columns: 1fr; }
+      button{ min-height: 76px; }
     }
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <h1>Golden Care 🐶</h1>
+    <p class="sub">Уход за голденом — быстро и удобно</p>
 
-<h1>🐶 Уход за голденом</h1>
+    <div class="grid">
+      <button onclick="tap('Покормил!')">
+        <span class="emoji">🍗</span>
+        <span class="label">Покормить</span>
+      </button>
 
-<button onclick="alert('Покормил!')">🍗 Покормить</button>
-<button onclick="alert('Погулял!')">🦮 Погулять</button>
-<button onclick="alert('Вычесал!')">🧼 Вычесать</button>
+      <button onclick="tap('Погулял!')">
+        <span class="emoji">🦮</span>
+        <span class="label">Погулять</span>
+      </button>
 
+      <button onclick="tap('Вычесал!')">
+        <span class="emoji">🧼</span>
+        <span class="label">Вычесать</span>
+      </button>
+
+      <button onclick="tap('Тренировка!')">
+        <span class="emoji">🎾</span>
+        <span class="label">Тренировка</span>
+      </button>
+    </div>
+
+    <div class="hint">Подсказка: это пока демо. Дальше сделаем сохранение действий и “уровни” 🐾</div>
+  </div>
+
+  <script>
+    const tg = window.Telegram?.WebApp;
+    if (tg) tg.ready();
+
+    function tap(text){
+      // лёгкая вибрация (если поддерживается)
+      tg?.HapticFeedback?.impactOccurred?.("light");
+      alert(text);
+    }
+  </script>
 </body>
 </html>
