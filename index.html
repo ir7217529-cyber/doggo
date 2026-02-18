@@ -68,15 +68,8 @@
       gap:10px;
       margin-top:8px;
     }
-    .head-left{
-      flex:1;
-      min-width:0;
-    }
-    h1{
-      font-size:22px;
-      margin:0;
-      line-height:1.1;
-    }
+    .head-left{ flex:1; min-width:0; }
+    h1{ font-size:22px; margin:0; line-height:1.1; }
     .sub{
       margin-top:4px;
       color:var(--muted);
@@ -121,16 +114,8 @@
       gap:10px;
       margin-bottom:10px;
     }
-    .pet-title{
-      font-weight:900;
-      font-size:14px;
-      color:#fff;
-    }
-    .pet-hint{
-      font-size:12px;
-      color:var(--muted);
-      white-space:nowrap;
-    }
+    .pet-title{ font-weight:900; font-size:14px; color:#fff; }
+    .pet-hint{ font-size:12px; color:var(--muted); white-space:nowrap; }
 
     /* XP / Level */
     .level-row{
@@ -140,17 +125,8 @@
       gap:10px;
       margin-top:6px;
     }
-    .lvl{
-      font-weight:900;
-      font-size:13px;
-      color:#fff;
-      white-space:nowrap;
-    }
-    .xptext{
-      color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
-    }
+    .lvl{ font-weight:900; font-size:13px; color:#fff; white-space:nowrap; }
+    .xptext{ color:var(--muted); font-size:12px; white-space:nowrap; }
     .xpbar{
       width:100%;
       height:10px;
@@ -195,9 +171,7 @@
       0%,100% { transform: translateY(0) rotate(-1.5deg); }
       50%     { transform: translateY(-6px) rotate(1.5deg); }
     }
-    .pet.petted{
-      animation: pet-pet 520ms ease-out 1;
-    }
+    .pet.petted{ animation: pet-pet 520ms ease-out 1; }
     @keyframes pet-pet{
       0%   { transform: translateY(0) scale(1) rotate(0deg); }
       35%  { transform: translateY(-10px) scale(1.05) rotate(4deg); }
@@ -205,12 +179,7 @@
       100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
 
-    .hearts{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:0;
-    }
+    .hearts{ position:absolute; inset:0; pointer-events:none; opacity:0; }
     .hearts.show{ opacity:1; }
     .heart{
       position:absolute;
@@ -233,7 +202,7 @@
     /* Статы */
     .stats{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
       gap:10px;
       margin-top:12px;
     }
@@ -245,6 +214,7 @@
       border-radius: 14px;
       padding: 10px;
       background: rgba(0,0,0,0.10);
+      min-width:0;
     }
     .stat-top{
       display:flex;
@@ -253,17 +223,23 @@
       gap:10px;
       margin-bottom:8px;
       font-size:12.5px;
+      min-width:0;
     }
     .stat-name{
       display:flex;
       align-items:center;
       gap:8px;
       color: var(--muted);
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
     .stat-val{
       font-variant-numeric: tabular-nums;
       color: #fff;
       opacity:0.9;
+      flex-shrink:0;
     }
     .bar{
       width:100%;
@@ -281,10 +257,10 @@
       transition: width 220ms ease;
     }
 
-    /* Действия */
+    /* Действия (ФИКС колонок) */
     .actions{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* ВОТ ЭТО главное */
       gap:10px;
       margin-top:12px;
     }
@@ -293,6 +269,8 @@
     }
     button.action{
       width:100%;
+      min-width:0;                 /* важно */
+      overflow:hidden;             /* важно */
       border: 1px solid var(--stroke);
       border-radius: 16px;
       padding: 12px 12px;
@@ -305,13 +283,12 @@
     }
     button.action:active{ transform: scale(0.98); }
 
-    /* ВАЖНО: фикс съезжающих колонок */
     .a-top{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      min-width:0;
+      min-width:0;                 /* важно */
     }
     .a-title{
       display:flex;
@@ -319,25 +296,17 @@
       gap:10px;
       font-size:14.5px;
       font-weight:900;
-      min-width:0;
+      min-width:0;                 /* важно */
       flex:1;
     }
-    .a-emoji{
-      font-size:20px;
-      line-height:1;
-      flex-shrink:0;
-    }
+    .a-emoji{ font-size:20px; line-height:1; flex-shrink:0; }
     .a-text{
       min-width:0;
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
     }
-    .a-plus{
-      font-size:20px;
-      opacity:0.8;
-      flex-shrink:0;
-    }
+    .a-plus{ font-size:20px; opacity:0.8; flex-shrink:0; }
 
     .a-hint{
       margin-top:6px;
@@ -346,6 +315,8 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      min-width:0;
+      display:block;
     }
 
     .row{
@@ -368,7 +339,7 @@
     /* Достижения */
     .ach-grid{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
       gap:10px;
       margin-top:10px;
     }
@@ -384,11 +355,12 @@
       gap:10px;
       align-items:flex-start;
       opacity:0.6;
+      min-width:0;
     }
     .ach.unlocked{ opacity:1; }
-    .ach-ico{ font-size:20px; line-height:1; margin-top:2px; }
+    .ach-ico{ font-size:20px; line-height:1; margin-top:2px; flex-shrink:0; }
     .ach-body{ display:flex; flex-direction:column; gap:2px; min-width:0; }
-    .ach-title{ font-size:13.5px; font-weight:900; }
+    .ach-title{ font-size:13.5px; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .ach-desc{ font-size:11.5px; color:var(--muted); }
 
     /* История */
@@ -411,12 +383,7 @@
       justify-content:space-between;
       gap:10px;
     }
-    .log-left{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      min-width:0;
-    }
+    .log-left{ display:flex; gap:10px; align-items:flex-start; min-width:0; }
     .log-emoji{ font-size:20px; line-height:1; margin-top:1px; flex-shrink:0; }
     .log-text{ display:flex; flex-direction:column; gap:2px; min-width:0; }
     .log-title{ font-size:13.5px; font-weight:900; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -460,11 +427,10 @@
         <h1>Golden Care</h1>
         <div class="sub" id="sub">Загружаю профиль…</div>
       </div>
-      <div class="chip" id="chip">v1.2 • save</div>
+      <div class="chip" id="chip">v1.3 • save</div>
     </header>
 
     <div class="card">
-      <!-- Пёс + уровень -->
       <div class="pet-card">
         <div class="pet-top">
           <div class="pet-title" id="petTitle">Пёсель</div>
@@ -490,7 +456,6 @@
         </div>
       </div>
 
-      <!-- Статы -->
       <div class="stats">
         <div class="stat">
           <div class="stat-top">
@@ -525,14 +490,13 @@
         </div>
       </div>
 
-      <!-- Действия -->
       <div class="actions">
         <button class="action" onclick="doAction('feed')">
           <div class="a-top">
             <div class="a-title"><span class="a-emoji">🍗</span><span class="a-text">Покормить</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Сытость +25 • Радость +6 • XP +12</div>
+          <span class="a-hint">Сытость +25 • Радость +6 • XP +12</span>
         </button>
 
         <button class="action" onclick="doAction('walk')">
@@ -540,7 +504,7 @@
             <div class="a-title"><span class="a-emoji">🦮</span><span class="a-text">Погулять</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Радость +18 • Энергия −10 • XP +14</div>
+          <span class="a-hint">Радость +18 • Энергия −10 • XP +14</span>
         </button>
 
         <button class="action" onclick="doAction('groom')">
@@ -548,7 +512,7 @@
             <div class="a-title"><span class="a-emoji">🧼</span><span class="a-text">Вычесать</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Чистота +25 • Радость +4 • XP +10</div>
+          <span class="a-hint">Чистота +25 • Радость +4 • XP +10</span>
         </button>
 
         <button class="action" onclick="doAction('train')">
@@ -556,7 +520,7 @@
             <div class="a-title"><span class="a-emoji">🎾</span><span class="a-text">Тренировка</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Радость +10 • Энергия −18 • XP +18</div>
+          <span class="a-hint">Радость +10 • Энергия −18 • XP +18</span>
         </button>
 
         <button class="action" onclick="doAction('rest')">
@@ -564,7 +528,7 @@
             <div class="a-title"><span class="a-emoji">😴</span><span class="a-text">Отдохнуть</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Энергия +28 • XP +8</div>
+          <span class="a-hint">Энергия +28 • XP +8</span>
         </button>
 
         <button class="action" onclick="doAction('treat')">
@@ -572,7 +536,7 @@
             <div class="a-title"><span class="a-emoji">🦴</span><span class="a-text">Лакомство</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <div class="a-hint">Радость +16 • Сытость +8 • XP +9</div>
+          <span class="a-hint">Радость +16 • Сытость +8 • XP +9</span>
         </button>
       </div>
 
@@ -583,7 +547,6 @@
       </div>
     </div>
 
-    <!-- Достижения -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">Достижения</div>
@@ -592,7 +555,6 @@
       <div class="ach-grid" id="achGrid"></div>
     </div>
 
-    <!-- История -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">История</div>
@@ -608,19 +570,8 @@
     const tg = window.Telegram?.WebApp;
     if (tg) tg.ready();
 
-    // ---------- Helpers ----------
     const clamp = (n, a=0, b=100) => Math.max(a, Math.min(b, n));
     const now = () => Date.now();
-
-    function fmtTime(ts){
-      try{
-        const d = new Date(ts);
-        return d.toLocaleString(undefined, { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
-      }catch{
-        return '';
-      }
-    }
-
     const el = (id) => document.getElementById(id);
 
     function toast(msg){
@@ -630,8 +581,8 @@
       setTimeout(()=>t.classList.remove('show'), 1150);
     }
 
-    // ---------- Storage ----------
-    const KEY = 'golden_care_state_v1_2';
+    // Storage
+    const KEY = 'golden_care_state_v1_3';
     const canCloud = !!(tg && tg.CloudStorage && typeof tg.CloudStorage.getItem === 'function');
 
     function loadStateLocal(){
@@ -641,7 +592,6 @@
     function saveStateLocal(state){
       localStorage.setItem(KEY, JSON.stringify(state));
     }
-
     function loadStateCloud(){
       return new Promise((resolve) => {
         tg.CloudStorage.getItem(KEY, (err, value) => {
@@ -655,28 +605,21 @@
         tg.CloudStorage.setItem(KEY, JSON.stringify(state), () => resolve(true));
       });
     }
-
     async function persist(){
       if (canCloud) await saveStateCloud(state);
       else saveStateLocal(state);
     }
 
-    // ---------- Game / XP ----------
-    function xpNeeded(level){
-      // плавный рост
-      return Math.round(100 + (level - 1) * 35);
-    }
-
+    // XP
+    function xpNeeded(level){ return Math.round(100 + (level - 1) * 35); }
     function addXP(amount){
       state.xp += amount;
       let leveled = false;
-
       while (state.xp >= xpNeeded(state.level)){
         state.xp -= xpNeeded(state.level);
         state.level += 1;
         leveled = true;
       }
-
       if (leveled){
         tg?.HapticFeedback?.notificationOccurred?.("success");
         toast(`🎉 Новый уровень: ${state.level}!`);
@@ -684,7 +627,7 @@
       }
     }
 
-    // ---------- Achievements ----------
+    // Achievements
     const ACHS = [
       { id:"first_action", ico:"🏁", title:"Первый шаг", desc:"Сделай любое действие 1 раз" },
       { id:"pet_10", ico:"💛", title:"Ласковый", desc:"Погладь пёселя 10 раз" },
@@ -707,16 +650,13 @@
     function checkAchievements(){
       const c = state.counts;
       const s = state.stats;
-
       const anyAction = c.feed + c.walk + c.groom + c.train + c.rest + c.treat + c.pet;
       if (anyAction >= 1) unlock("first_action");
-
       if (c.pet >= 10) unlock("pet_10");
       if (c.feed >= 10) unlock("feed_10");
       if (c.walk >= 10) unlock("walk_10");
       if (c.train >= 10) unlock("train_10");
       if (c.groom >= 10) unlock("clean_10");
-
       if (state.level >= 5) unlock("level_5");
       if (Math.round(s.happy) >= 100) unlock("full_happy");
     }
@@ -738,7 +678,7 @@
       });
     }
 
-    // ---------- State ----------
+    // State
     const DEFAULT = {
       dogName: "Голден",
       stats: { hunger: 78, happy: 70, clean: 65, energy: 72 },
@@ -752,32 +692,33 @@
 
     let state = structuredClone(DEFAULT);
 
-    function applyDecay(){
-      const t = now();
-      const dtMin = Math.max(0, (t - (state.lastTick || t)) / 60000);
-      state.lastTick = t;
-
-      state.stats.hunger = clamp(state.stats.hunger - dtMin * 0.9);
-      state.stats.happy  = clamp(state.stats.happy  - dtMin * 0.45);
-      state.stats.clean  = clamp(state.stats.clean  - dtMin * 0.35);
-      state.stats.energy = clamp(state.stats.energy - dtMin * 0.70);
-    }
-
     function addLog(emoji, title){
       state.history.unshift({ emoji, title, ts: now() });
       state.history = state.history.slice(0, 60);
     }
 
+    function applyDecay(){
+      const t = now();
+      const dtMin = Math.max(0, (t - (state.lastTick || t)) / 60000);
+      state.lastTick = t;
+
+      // СДЕЛАЛ МЕДЛЕННЕЕ (чтобы за пару часов не падало в ноль)
+      // примерно: за 24 часа падает ощутимо, но не моментально
+      state.stats.hunger = clamp(state.stats.hunger - dtMin * 0.06);
+      state.stats.happy  = clamp(state.stats.happy  - dtMin * 0.04);
+      state.stats.clean  = clamp(state.stats.clean  - dtMin * 0.03);
+      state.stats.energy = clamp(state.stats.energy - dtMin * 0.05);
+    }
+
     const ACTIONS = {
       feed:  { emoji:"🍗", title:"Покормил",   xp:12, delta:{ hunger:+25, happy:+6,  clean:0,   energy:0 } },
-      walk:  { emoji:"🦮", title:"Погулял",    xp:14, delta:{ hunger:-6,  happy:+18, clean:-3,  energy:-10 } },
-      groom: { emoji:"🧼", title:"Вычесал",    xp:10, delta:{ hunger:0,   happy:+4,  clean:+25, energy:-3 } },
-      train: { emoji:"🎾", title:"Тренировка", xp:18, delta:{ hunger:-8,  happy:+10, clean:-2,  energy:-18 } },
-      rest:  { emoji:"😴", title:"Отдохнул",   xp:8,  delta:{ hunger:-2,  happy:+2,  clean:0,   energy:+28 } },
+      walk:  { emoji:"🦮", title:"Погулял",    xp:14, delta:{ hunger:-3,  happy:+18, clean:-2,  energy:-10 } },
+      groom: { emoji:"🧼", title:"Вычесал",    xp:10, delta:{ hunger:0,   happy:+4,  clean:+25, energy:-2 } },
+      train: { emoji:"🎾", title:"Тренировка", xp:18, delta:{ hunger:-4,  happy:+10, clean:-1,  energy:-18 } },
+      rest:  { emoji:"😴", title:"Отдохнул",   xp:8,  delta:{ hunger:-1,  happy:+2,  clean:0,   energy:+28 } },
       treat: { emoji:"🦴", title:"Лакомство",  xp:9,  delta:{ hunger:+8,  happy:+16, clean:0,   energy:0 } },
     };
 
-    // ---------- Render ----------
     function render(){
       const s = state.stats;
 
@@ -795,20 +736,16 @@
       el('sub').textContent = `Питомец: ${state.dogName} • пользователь: ${uname}`;
       el('petTitle').textContent = state.dogName;
 
-      // Save chip
       el('saveMode').textContent = canCloud ? "Сохраняю в Telegram" : "Сохраняю на устройстве";
-      el('chip').textContent = canCloud ? "v1.2 • Telegram save" : "v1.2 • device save";
+      el('chip').textContent = canCloud ? "v1.3 • Telegram save" : "v1.3 • device save";
 
-      // XP/Level
-      el("lvl").textContent = `Уровень ${state.level}`;
       const need = xpNeeded(state.level);
+      el("lvl").textContent = `Уровень ${state.level}`;
       el("xptext").textContent = `${Math.round(state.xp)} / ${need} XP`;
       el("xpfill").style.width = clamp((state.xp / need) * 100) + "%";
 
-      // Achievements
       renderAchievements();
 
-      // History
       const list = el('history');
       list.innerHTML = "";
       if (!state.history.length){
@@ -822,7 +759,7 @@
               <div class="log-emoji">${item.emoji}</div>
               <div class="log-text">
                 <div class="log-title">${item.title}</div>
-                <div class="log-time">${fmtTime(item.ts)}</div>
+                <div class="log-time">${new Date(item.ts).toLocaleString(undefined, { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' })}</div>
               </div>
             </div>
           `;
@@ -831,7 +768,6 @@
       }
     }
 
-    // ---------- Actions ----------
     window.doAction = async function(key){
       applyDecay();
       const a = ACTIONS[key];
@@ -848,17 +784,13 @@
       addXP(a.xp);
 
       tg?.HapticFeedback?.impactOccurred?.("light");
-
-      if (state.stats.hunger < 15) toast("Он голодный 😭");
-      else if (state.stats.energy < 15) toast("Он устал 😴");
-      else toast(`${a.emoji} ${a.title}! +${a.xp}XP`);
+      toast(`${a.emoji} ${a.title}! +${a.xp}XP`);
 
       checkAchievements();
       await persist();
       render();
     }
 
-    // Погладить
     window.petDog = async function(){
       applyDecay();
 
@@ -866,7 +798,6 @@
       state.stats.energy = clamp(state.stats.energy + 1);
 
       state.counts.pet += 1;
-
       addLog("🐶", "Погладил пёселя");
       addXP(4);
 
@@ -917,7 +848,6 @@
       tg?.showPopup?.({ title: "Поделиться", message: msg, buttons: [{type:"ok"}] }) || alert(msg);
     }
 
-    // ---------- Boot ----------
     async function boot(){
       let loaded = null;
       if (canCloud) loaded = await loadStateCloud();
@@ -925,7 +855,7 @@
 
       state = loaded ? loaded : structuredClone(DEFAULT);
 
-      // миграция на случай старых сохранений
+      // миграция
       state.level ??= 1;
       state.xp ??= 0;
       state.unlocked ??= {};
@@ -936,13 +866,12 @@
       await persist();
       render();
 
-      // тик каждые 10 сек
       setInterval(async () => {
         applyDecay();
         checkAchievements();
         await persist();
         render();
-      }, 10000);
+      }, 15000);
     }
 
     boot();
