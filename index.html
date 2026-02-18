@@ -28,29 +28,17 @@
       overflow-x:hidden;
     }
 
-    /* Лапки на фоне */
-    .bg{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
-      opacity:1;
-    }
+    /* Фон лапки */
+    .bg{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:1; }
     .paw{
-      position:absolute;
-      right:-40px;
-      top: 22%;
-      font-size: 22px;
-      opacity:0.12;
+      position:absolute; right:-40px; top: 22%;
+      font-size:22px; opacity:0.12;
       animation: paw-drift 10s linear infinite;
     }
     .paw:nth-child(2){ top: 38%; animation-duration: 12s; font-size: 20px; opacity:0.10; }
     .paw:nth-child(3){ top: 58%; animation-duration: 14s; font-size: 24px; opacity:0.11; }
     .paw:nth-child(4){ top: 74%; animation-duration: 11s; font-size: 21px; opacity:0.09; }
-    @keyframes paw-drift{
-      0%   { transform: translateX(0) rotate(-10deg); }
-      100% { transform: translateX(-120vw) rotate(10deg); }
-    }
+    @keyframes paw-drift{ 0%{transform:translateX(0) rotate(-10deg)} 100%{transform:translateX(-120vw) rotate(10deg)} }
 
     .wrap{
       max-width:720px;
@@ -60,13 +48,10 @@
       z-index:2;
     }
 
-    /* Шапка (фикс съезжающего текста) */
+    /* Шапка */
     header{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-      margin-top:8px;
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:10px; margin-top:8px;
     }
     .head-left{ flex:1; min-width:0; }
     h1{ font-size:22px; margin:0; line-height:1.1; }
@@ -74,12 +59,13 @@
       margin-top:4px;
       color:var(--muted);
       font-size:12.5px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .chip-row{
+      display:flex; gap:8px; align-items:center; justify-content:flex-end;
+      flex-shrink:0;
     }
     .chip{
-      flex-shrink:0;
       padding:8px 10px;
       border:1px solid var(--stroke);
       border-radius:999px;
@@ -98,7 +84,7 @@
       backdrop-filter: blur(10px);
     }
 
-    /* Питомец */
+    /* Питомец + настроение */
     .pet-card{
       position:relative;
       padding: 12px;
@@ -108,95 +94,68 @@
       overflow:hidden;
     }
     .pet-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px; margin-bottom:10px;
     }
     .pet-title{ font-weight:900; font-size:14px; color:#fff; }
     .pet-hint{ font-size:12px; color:var(--muted); white-space:nowrap; }
-
-    /* XP / Level */
-    .level-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+    .mood{
       margin-top:6px;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
+
+    /* XP */
+    .level-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:6px; }
     .lvl{ font-weight:900; font-size:13px; color:#fff; white-space:nowrap; }
     .xptext{ color:var(--muted); font-size:12px; white-space:nowrap; }
     .xpbar{
-      width:100%;
-      height:10px;
-      border-radius:999px;
+      width:100%; height:10px; border-radius:999px;
       background: rgba(255,255,255,0.10);
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,0.08);
+      overflow:hidden; border: 1px solid rgba(255,255,255,0.08);
       margin-top:8px;
     }
-    .xpfill{
-      height:100%;
-      width:30%;
-      border-radius:999px;
-      background: rgba(255,255,255,0.85);
-      transition: width 220ms ease;
-    }
+    .xpfill{ height:100%; width:30%; border-radius:999px; background: rgba(255,255,255,0.85); transition: width 220ms ease; }
 
-    .pet-zone{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 6px 0 2px;
-    }
+    /* Собака */
+    .pet-zone{ display:flex; align-items:center; justify-content:center; padding: 6px 0 2px; }
     .pet-btn{
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-      padding: 6px;
-      border-radius: 999px;
-      outline: none;
+      border:0; background:transparent; cursor:pointer;
+      padding:6px; border-radius:999px; outline:none;
       -webkit-tap-highlight-color: transparent;
     }
     .pet{
-      font-size: 88px;
-      line-height: 1;
+      font-size:88px; line-height:1;
       filter: drop-shadow(0 14px 30px rgba(0,0,0,0.55));
       transform-origin: 50% 80%;
       animation: pet-idle 2.8s ease-in-out infinite;
       user-select:none;
     }
-    @keyframes pet-idle{
-      0%,100% { transform: translateY(0) rotate(-1.5deg); }
-      50%     { transform: translateY(-6px) rotate(1.5deg); }
-    }
+    @keyframes pet-idle{ 0%,100%{transform:translateY(0) rotate(-1.5deg)} 50%{transform:translateY(-6px) rotate(1.5deg)} }
     .pet.petted{ animation: pet-pet 520ms ease-out 1; }
     @keyframes pet-pet{
-      0%   { transform: translateY(0) scale(1) rotate(0deg); }
-      35%  { transform: translateY(-10px) scale(1.05) rotate(4deg); }
-      70%  { transform: translateY(0) scale(0.98) rotate(-4deg); }
-      100% { transform: translateY(0) scale(1) rotate(0deg); }
+      0%{transform:translateY(0) scale(1) rotate(0deg)}
+      35%{transform:translateY(-10px) scale(1.05) rotate(4deg)}
+      70%{transform:translateY(0) scale(0.98) rotate(-4deg)}
+      100%{transform:translateY(0) scale(1) rotate(0deg)}
     }
 
     .hearts{ position:absolute; inset:0; pointer-events:none; opacity:0; }
     .hearts.show{ opacity:1; }
     .heart{
-      position:absolute;
-      left:50%;
-      top:55%;
+      position:absolute; left:50%; top:55%;
       transform: translate(-50%,-50%);
-      font-size:18px;
-      opacity:0;
+      font-size:18px; opacity:0;
       animation: heart-pop 700ms ease-out forwards;
     }
     .heart:nth-child(1){ margin-left:-26px; animation-delay: 0ms; }
     .heart:nth-child(2){ margin-left: 0px;  animation-delay: 60ms; }
     .heart:nth-child(3){ margin-left: 26px; animation-delay: 120ms; }
     @keyframes heart-pop{
-      0%   { opacity:0; transform: translate(-50%,-50%) scale(0.7); }
-      30%  { opacity:0.9; transform: translate(-50%,-70%) scale(1.1); }
-      100% { opacity:0; transform: translate(-50%,-120%) scale(1.0); }
+      0%{opacity:0; transform:translate(-50%,-50%) scale(0.7)}
+      30%{opacity:0.9; transform:translate(-50%,-70%) scale(1.1)}
+      100%{opacity:0; transform:translate(-50%,-120%) scale(1.0)}
     }
 
     /* Статы */
@@ -206,9 +165,7 @@
       gap:10px;
       margin-top:12px;
     }
-    @media (max-width: 420px){
-      .stats{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 420px){ .stats{ grid-template-columns: 1fr; } }
     .stat{
       border: 1px solid var(--stroke);
       border-radius: 14px;
@@ -217,97 +174,54 @@
       min-width:0;
     }
     .stat-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
-      font-size:12.5px;
-      min-width:0;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin-bottom:8px; font-size:12.5px; min-width:0;
     }
     .stat-name{
-      display:flex;
-      align-items:center;
-      gap:8px;
+      display:flex; align-items:center; gap:8px;
       color: var(--muted);
-      min-width:0;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+      min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
     }
-    .stat-val{
-      font-variant-numeric: tabular-nums;
-      color: #fff;
-      opacity:0.9;
-      flex-shrink:0;
-    }
+    .stat-val{ font-variant-numeric: tabular-nums; color:#fff; opacity:0.9; flex-shrink:0; }
     .bar{
-      width:100%;
-      height:10px;
-      border-radius: 999px;
+      width:100%; height:10px; border-radius:999px;
       background: rgba(255,255,255,0.10);
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,0.08);
+      overflow:hidden; border:1px solid rgba(255,255,255,0.08);
     }
-    .fill{
-      height:100%;
-      width:50%;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.85);
-      transition: width 220ms ease;
-    }
+    .fill{ height:100%; width:50%; border-radius:999px; background: rgba(255,255,255,0.85); transition: width 220ms ease; }
 
-    /* Действия (ФИКС колонок) */
+    /* Действия (фикс колонок) */
     .actions{
       display:grid;
-      grid-template-columns: minmax(0,1fr) minmax(0,1fr); /* ВОТ ЭТО главное */
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
       gap:10px;
       margin-top:12px;
     }
-    @media (max-width: 360px){
-      .actions{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 360px){ .actions{ grid-template-columns: 1fr; } }
     button.action{
       width:100%;
-      min-width:0;                 /* важно */
-      overflow:hidden;             /* важно */
-      border: 1px solid var(--stroke);
-      border-radius: 16px;
-      padding: 12px 12px;
+      min-width:0;
+      overflow:hidden;
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:12px 12px;
       background: rgba(0,0,0,0.18);
-      color: var(--text);
+      color:var(--text);
       text-align:left;
       cursor:pointer;
-      min-height: 58px;
+      min-height:58px;
       transition: transform 120ms ease;
     }
     button.action:active{ transform: scale(0.98); }
-
-    .a-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      min-width:0;                 /* важно */
-    }
+    .a-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; min-width:0; }
     .a-title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:14.5px;
-      font-weight:900;
-      min-width:0;                 /* важно */
-      flex:1;
+      display:flex; align-items:center; gap:10px;
+      font-size:14.5px; font-weight:900;
+      min-width:0; flex:1;
     }
     .a-emoji{ font-size:20px; line-height:1; flex-shrink:0; }
-    .a-text{
-      min-width:0;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
+    .a-text{ min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .a-plus{ font-size:20px; opacity:0.8; flex-shrink:0; }
-
     .a-hint{
       margin-top:6px;
       color:var(--muted);
@@ -315,16 +229,10 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
-      min-width:0;
       display:block;
     }
 
-    .row{
-      display:flex;
-      gap:10px;
-      margin-top:10px;
-      flex-wrap:wrap;
-    }
+    .row{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
     .btn-mini{
       border:1px solid var(--stroke);
       background: rgba(0,0,0,0.18);
@@ -336,6 +244,43 @@
     }
     .btn-mini:active{ transform: scale(0.98); }
 
+    /* Магазин */
+    .shop-grid{
+      display:grid;
+      grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 420px){ .shop-grid{ grid-template-columns: 1fr; } }
+    .item{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.10);
+      border-radius:12px;
+      padding:10px;
+      min-width:0;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .item-ico{ font-size:22px; line-height:1; flex-shrink:0; margin-top:2px; }
+    .item-body{ min-width:0; flex:1; display:flex; flex-direction:column; gap:2px; }
+    .item-title{ font-size:13.5px; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .item-desc{ font-size:11.5px; color:var(--muted); }
+    .item-row{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:6px; }
+    .price{ font-size:12px; color:var(--muted); white-space:nowrap; }
+    .btn-buy{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.18);
+      color:#fff;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn-buy:active{ transform: scale(0.98); }
+    .btn-buy.secondary{ color:var(--muted); }
+
     /* Достижения */
     .ach-grid{
       display:grid;
@@ -343,9 +288,7 @@
       gap:10px;
       margin-top:10px;
     }
-    @media (max-width: 420px){
-      .ach-grid{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 420px){ .ach-grid{ grid-template-columns: 1fr; } }
     .ach{
       border:1px solid var(--stroke);
       background: rgba(0,0,0,0.10);
@@ -406,19 +349,13 @@
       z-index:3;
       backdrop-filter: blur(8px);
     }
-    .toast.show{
-      opacity:1;
-      transform: translateX(-50%) translateY(-6px);
-    }
+    .toast.show{ opacity:1; transform: translateX(-50%) translateY(-6px); }
   </style>
 </head>
 
 <body>
   <div class="bg">
-    <div class="paw">🐾</div>
-    <div class="paw">🐾</div>
-    <div class="paw">🐾</div>
-    <div class="paw">🐾</div>
+    <div class="paw">🐾</div><div class="paw">🐾</div><div class="paw">🐾</div><div class="paw">🐾</div>
   </div>
 
   <div class="wrap">
@@ -427,7 +364,10 @@
         <h1>Golden Care</h1>
         <div class="sub" id="sub">Загружаю профиль…</div>
       </div>
-      <div class="chip" id="chip">v1.3 • save</div>
+      <div class="chip-row">
+        <div class="chip" id="coinChip">🪙 0</div>
+        <div class="chip" id="chip">v2.0</div>
+      </div>
     </header>
 
     <div class="card">
@@ -443,6 +383,8 @@
         </div>
         <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
 
+        <div class="mood" id="mood">Настроение: …</div>
+
         <div class="pet-zone">
           <button class="pet-btn" onclick="petDog()" aria-label="Погладить собаку">
             <div class="pet" id="petDog">🐶</div>
@@ -450,42 +392,25 @@
         </div>
 
         <div class="hearts" id="hearts">
-          <div class="heart">💛</div>
-          <div class="heart">💛</div>
-          <div class="heart">💛</div>
+          <div class="heart">💛</div><div class="heart">💛</div><div class="heart">💛</div>
         </div>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <div class="stat-top">
-            <div class="stat-name">🍗 Сытость</div>
-            <div class="stat-val" id="v_hunger">—</div>
-          </div>
+          <div class="stat-top"><div class="stat-name">🍗 Сытость</div><div class="stat-val" id="v_hunger">—</div></div>
           <div class="bar"><div class="fill" id="b_hunger"></div></div>
         </div>
-
         <div class="stat">
-          <div class="stat-top">
-            <div class="stat-name">😊 Радость</div>
-            <div class="stat-val" id="v_happy">—</div>
-          </div>
+          <div class="stat-top"><div class="stat-name">😊 Радость</div><div class="stat-val" id="v_happy">—</div></div>
           <div class="bar"><div class="fill" id="b_happy"></div></div>
         </div>
-
         <div class="stat">
-          <div class="stat-top">
-            <div class="stat-name">🧼 Чистота</div>
-            <div class="stat-val" id="v_clean">—</div>
-          </div>
+          <div class="stat-top"><div class="stat-name">🧼 Чистота</div><div class="stat-val" id="v_clean">—</div></div>
           <div class="bar"><div class="fill" id="b_clean"></div></div>
         </div>
-
         <div class="stat">
-          <div class="stat-top">
-            <div class="stat-name">⚡ Энергия</div>
-            <div class="stat-val" id="v_energy">—</div>
-          </div>
+          <div class="stat-top"><div class="stat-name">⚡ Энергия</div><div class="stat-val" id="v_energy">—</div></div>
           <div class="bar"><div class="fill" id="b_energy"></div></div>
         </div>
       </div>
@@ -496,7 +421,7 @@
             <div class="a-title"><span class="a-emoji">🍗</span><span class="a-text">Покормить</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <span class="a-hint">Сытость +25 • Радость +6 • XP +12</span>
+          <span class="a-hint" id="hint_feed">Сытость +25 • Радость +6 • XP +12 • 🪙 +3</span>
         </button>
 
         <button class="action" onclick="doAction('walk')">
@@ -504,7 +429,7 @@
             <div class="a-title"><span class="a-emoji">🦮</span><span class="a-text">Погулять</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <span class="a-hint">Радость +18 • Энергия −10 • XP +14</span>
+          <span class="a-hint" id="hint_walk">Радость +18 • Энергия −10 • XP +14 • 🪙 +4</span>
         </button>
 
         <button class="action" onclick="doAction('groom')">
@@ -512,7 +437,7 @@
             <div class="a-title"><span class="a-emoji">🧼</span><span class="a-text">Вычесать</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <span class="a-hint">Чистота +25 • Радость +4 • XP +10</span>
+          <span class="a-hint" id="hint_groom">Чистота +25 • Радость +4 • XP +10 • 🪙 +2</span>
         </button>
 
         <button class="action" onclick="doAction('train')">
@@ -520,7 +445,7 @@
             <div class="a-title"><span class="a-emoji">🎾</span><span class="a-text">Тренировка</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <span class="a-hint">Радость +10 • Энергия −18 • XP +18</span>
+          <span class="a-hint" id="hint_train">Радость +10 • Энергия −18 • XP +18 • 🪙 +5</span>
         </button>
 
         <button class="action" onclick="doAction('rest')">
@@ -528,7 +453,7 @@
             <div class="a-title"><span class="a-emoji">😴</span><span class="a-text">Отдохнуть</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <span class="a-hint">Энергия +28 • XP +8</span>
+          <span class="a-hint" id="hint_rest">Энергия +28 • XP +8 • 🪙 +1</span>
         </button>
 
         <button class="action" onclick="doAction('treat')">
@@ -536,17 +461,28 @@
             <div class="a-title"><span class="a-emoji">🦴</span><span class="a-text">Лакомство</span></div>
             <div class="a-plus">＋</div>
           </div>
-          <span class="a-hint">Радость +16 • Сытость +8 • XP +9</span>
+          <span class="a-hint" id="hint_treat">Радость +16 • Сытость +8 • XP +9 • 🪙 +2</span>
         </button>
       </div>
 
       <div class="row">
         <button class="btn-mini" onclick="renameDog()">✏️ Имя</button>
+        <button class="btn-mini" onclick="openReminders()">⏰ Напоминалки</button>
         <button class="btn-mini" onclick="resetAll()">🗑 Сброс</button>
         <button class="btn-mini" onclick="share()">📤 Поделиться</button>
       </div>
     </div>
 
+    <!-- Магазин -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div style="font-weight:900;">Магазин</div>
+        <div style="color:var(--muted);font-size:12px;" id="equipInfo">Экипировано: —</div>
+      </div>
+      <div class="shop-grid" id="shopGrid"></div>
+    </div>
+
+    <!-- Достижения -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">Достижения</div>
@@ -555,6 +491,7 @@
       <div class="ach-grid" id="achGrid"></div>
     </div>
 
+    <!-- История -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">История</div>
@@ -582,16 +519,12 @@
     }
 
     // Storage
-    const KEY = 'golden_care_state_v1_3';
+    const KEY = 'golden_care_state_v2_0';
     const canCloud = !!(tg && tg.CloudStorage && typeof tg.CloudStorage.getItem === 'function');
 
-    function loadStateLocal(){
-      const raw = localStorage.getItem(KEY);
-      return raw ? JSON.parse(raw) : null;
-    }
-    function saveStateLocal(state){
-      localStorage.setItem(KEY, JSON.stringify(state));
-    }
+    function loadStateLocal(){ const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }
+    function saveStateLocal(state){ localStorage.setItem(KEY, JSON.stringify(state)); }
+
     function loadStateCloud(){
       return new Promise((resolve) => {
         tg.CloudStorage.getItem(KEY, (err, value) => {
@@ -605,10 +538,7 @@
         tg.CloudStorage.setItem(KEY, JSON.stringify(state), () => resolve(true));
       });
     }
-    async function persist(){
-      if (canCloud) await saveStateCloud(state);
-      else saveStateLocal(state);
-    }
+    async function persist(){ if (canCloud) await saveStateCloud(state); else saveStateLocal(state); }
 
     // XP
     function xpNeeded(level){ return Math.round(100 + (level - 1) * 35); }
@@ -627,14 +557,46 @@
       }
     }
 
+    // Shop items (дают бонусы)
+    const SHOP = [
+      { id:"collar", ico:"🧿", title:"Ошейник", price:25, desc:"Бонус: прогулка даёт +2 XP", bonus:{ walk_xp:+2 } },
+      { id:"ball",   ico:"⚽", title:"Мячик",   price:35, desc:"Бонус: тренировка даёт +3 радости", bonus:{ train_happy:+3 } },
+      { id:"bowl",   ico:"🥣", title:"Миска",   price:30, desc:"Бонус: кормёжка даёт +5 сытости", bonus:{ feed_hunger:+5 } },
+      { id:"brush",  ico:"🪮", title:"Щётка",   price:28, desc:"Бонус: вычёсывание даёт +3 чистоты", bonus:{ groom_clean:+3 } },
+      { id:"blanket",ico:"🧸", title:"Плед",    price:20, desc:"Бонус: отдых даёт +4 энергии", bonus:{ rest_energy:+4 } },
+    ];
+
+    function getEquipped(){
+      if (!state.equipped) return null;
+      return SHOP.find(i=>i.id===state.equipped) || null;
+    }
+
+    function applyBonus(actionKey, base){
+      // base: {delta:{...}, xp, coins}
+      const eq = getEquipped();
+      if (!eq) return base;
+
+      const b = eq.bonus || {};
+
+      // XP bonuses
+      if (actionKey === "walk" && b.walk_xp) base.xp += b.walk_xp;
+
+      // stat bonuses
+      if (actionKey === "train" && b.train_happy) base.delta.happy += b.train_happy;
+      if (actionKey === "feed"  && b.feed_hunger) base.delta.hunger += b.feed_hunger;
+      if (actionKey === "groom" && b.groom_clean) base.delta.clean += b.groom_clean;
+      if (actionKey === "rest"  && b.rest_energy) base.delta.energy += b.rest_energy;
+
+      return base;
+    }
+
     // Achievements
     const ACHS = [
       { id:"first_action", ico:"🏁", title:"Первый шаг", desc:"Сделай любое действие 1 раз" },
       { id:"pet_10", ico:"💛", title:"Ласковый", desc:"Погладь пёселя 10 раз" },
-      { id:"feed_10", ico:"🍗", title:"Шеф-повар", desc:"Покорми 10 раз" },
-      { id:"walk_10", ico:"🦮", title:"Прогулочник", desc:"Погуляй 10 раз" },
-      { id:"train_10", ico:"🎾", title:"Тренер", desc:"Потренируйся 10 раз" },
-      { id:"clean_10", ico:"🧼", title:"Груминг-мастер", desc:"Вычесай 10 раз" },
+      { id:"coins_50", ico:"🪙", title:"Копилка", desc:"Накопи 50 монет" },
+      { id:"buy_1", ico:"🛍️", title:"Первая покупка", desc:"Купи 1 предмет" },
+      { id:"equip_1", ico:"🎽", title:"Экипировка", desc:"Экипируй предмет" },
       { id:"level_5", ico:"⭐", title:"Пятый уровень", desc:"Достигни уровня 5" },
       { id:"full_happy", ico:"😁", title:"Счастливчик", desc:"Подними радость до 100%" },
     ];
@@ -651,12 +613,12 @@
       const c = state.counts;
       const s = state.stats;
       const anyAction = c.feed + c.walk + c.groom + c.train + c.rest + c.treat + c.pet;
+
       if (anyAction >= 1) unlock("first_action");
       if (c.pet >= 10) unlock("pet_10");
-      if (c.feed >= 10) unlock("feed_10");
-      if (c.walk >= 10) unlock("walk_10");
-      if (c.train >= 10) unlock("train_10");
-      if (c.groom >= 10) unlock("clean_10");
+      if (state.coins >= 50) unlock("coins_50");
+      if (Object.keys(state.owned || {}).length >= 1) unlock("buy_1");
+      if (state.equipped) unlock("equip_1");
       if (state.level >= 5) unlock("level_5");
       if (Math.round(s.happy) >= 100) unlock("full_happy");
     }
@@ -678,7 +640,7 @@
       });
     }
 
-    // State
+    // Game state
     const DEFAULT = {
       dogName: "Голден",
       stats: { hunger: 78, happy: 70, clean: 65, energy: 72 },
@@ -686,15 +648,19 @@
       lastTick: now(),
       level: 1,
       xp: 0,
+      coins: 0,
+      owned: {},         // { itemId: true }
+      equipped: null,    // itemId
       unlocked: {},
-      counts: { feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 }
+      counts: { feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 },
+      reminders: { enabled:false, feed_h:6, walk_h:8, quiet_from:0, quiet_to:7 }
     };
 
     let state = structuredClone(DEFAULT);
 
     function addLog(emoji, title){
       state.history.unshift({ emoji, title, ts: now() });
-      state.history = state.history.slice(0, 60);
+      state.history = state.history.slice(0, 70);
     }
 
     function applyDecay(){
@@ -702,8 +668,7 @@
       const dtMin = Math.max(0, (t - (state.lastTick || t)) / 60000);
       state.lastTick = t;
 
-      // СДЕЛАЛ МЕДЛЕННЕЕ (чтобы за пару часов не падало в ноль)
-      // примерно: за 24 часа падает ощутимо, но не моментально
+      // мягкий спад
       state.stats.hunger = clamp(state.stats.hunger - dtMin * 0.06);
       state.stats.happy  = clamp(state.stats.happy  - dtMin * 0.04);
       state.stats.clean  = clamp(state.stats.clean  - dtMin * 0.03);
@@ -711,13 +676,125 @@
     }
 
     const ACTIONS = {
-      feed:  { emoji:"🍗", title:"Покормил",   xp:12, delta:{ hunger:+25, happy:+6,  clean:0,   energy:0 } },
-      walk:  { emoji:"🦮", title:"Погулял",    xp:14, delta:{ hunger:-3,  happy:+18, clean:-2,  energy:-10 } },
-      groom: { emoji:"🧼", title:"Вычесал",    xp:10, delta:{ hunger:0,   happy:+4,  clean:+25, energy:-2 } },
-      train: { emoji:"🎾", title:"Тренировка", xp:18, delta:{ hunger:-4,  happy:+10, clean:-1,  energy:-18 } },
-      rest:  { emoji:"😴", title:"Отдохнул",   xp:8,  delta:{ hunger:-1,  happy:+2,  clean:0,   energy:+28 } },
-      treat: { emoji:"🦴", title:"Лакомство",  xp:9,  delta:{ hunger:+8,  happy:+16, clean:0,   energy:0 } },
+      feed:  { emoji:"🍗", title:"Покормил",   xp:12, coins:3, delta:{ hunger:+25, happy:+6,  clean:0,   energy:0 } },
+      walk:  { emoji:"🦮", title:"Погулял",    xp:14, coins:4, delta:{ hunger:-3,  happy:+18, clean:-2,  energy:-10 } },
+      groom: { emoji:"🧼", title:"Вычесал",    xp:10, coins:2, delta:{ hunger:0,   happy:+4,  clean:+25, energy:-2 } },
+      train: { emoji:"🎾", title:"Тренировка", xp:18, coins:5, delta:{ hunger:-4,  happy:+10, clean:-1,  energy:-18 } },
+      rest:  { emoji:"😴", title:"Отдохнул",   xp:8,  coins:1, delta:{ hunger:-1,  happy:+2,  clean:0,   energy:+28 } },
+      treat: { emoji:"🦴", title:"Лакомство",  xp:9,  coins:2, delta:{ hunger:+8,  happy:+16, clean:0,   energy:0 } },
     };
+
+    function computeMood(){
+      const s = state.stats;
+      const minStat = Math.min(s.hunger, s.happy, s.clean, s.energy);
+
+      let mood = { emoji:"🐶", text:"Нормально себя чувствует 🙂" };
+
+      if (minStat < 15) mood = { emoji:"😢", text:"Плохо… срочно нужен уход 😭" };
+      else if (s.hunger < 25) mood = { emoji:"🥺", text:"Голодненький… покорми меня 🍗" };
+      else if (s.energy < 25) mood = { emoji:"😴", text:"Устал… хочу отдыхать 😴" };
+      else if (s.clean < 25) mood = { emoji:"🤢", text:"Я грязный… вычеши меня 🧼" };
+      else if (s.happy > 85 && s.hunger > 60) mood = { emoji:"😁", text:"Счастливый пёс! 💛" };
+
+      return mood;
+    }
+
+    function renderShop(){
+      const grid = el("shopGrid");
+      grid.innerHTML = "";
+
+      const eq = getEquipped();
+      el("equipInfo").textContent = "Экипировано: " + (eq ? `${eq.ico} ${eq.title}` : "—");
+
+      SHOP.forEach(item => {
+        const owned = !!state.owned[item.id];
+        const equipped = state.equipped === item.id;
+
+        const btnText = equipped ? "Снято" : (owned ? "Экипировать" : `Купить`);
+        const btnClass = owned ? "btn-buy secondary" : "btn-buy";
+        const priceText = owned ? (equipped ? "Экипировано" : "Куплено") : `Цена: 🪙 ${item.price}`;
+
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <div class="item-ico">${item.ico}</div>
+          <div class="item-body">
+            <div class="item-title">${item.title}</div>
+            <div class="item-desc">${item.desc}</div>
+            <div class="item-row">
+              <div class="price">${priceText}</div>
+              <button class="${btnClass}" data-id="${item.id}">${btnText}</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(div);
+      });
+
+      grid.querySelectorAll("button[data-id]").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          const id = e.currentTarget.getAttribute("data-id");
+          await shopClick(id);
+        });
+      });
+    }
+
+    async function shopClick(id){
+      const item = SHOP.find(i=>i.id===id);
+      if (!item) return;
+
+      const owned = !!state.owned[id];
+      const equipped = state.equipped === id;
+
+      if (!owned){
+        if (state.coins < item.price){
+          toast("Не хватает монет 🪙");
+          tg?.HapticFeedback?.notificationOccurred?.("error");
+          return;
+        }
+        state.coins -= item.price;
+        state.owned[id] = true;
+        addLog("🛍️", `Купил: ${item.title}`);
+        toast(`Куплено: ${item.ico} ${item.title}`);
+      } else {
+        if (equipped){
+          state.equipped = null;
+          addLog("🎽", `Снял: ${item.title}`);
+          toast("Снято ✅");
+        } else {
+          state.equipped = id;
+          addLog("🎽", `Экипировал: ${item.title}`);
+          toast(`Экипировано: ${item.ico}`);
+        }
+      }
+
+      checkAchievements();
+      await persist();
+      render();
+    }
+
+    function updateHints(){
+      // чисто чтобы игрок видел, что бонусы работают
+      const eq = getEquipped();
+      const base = structuredClone(ACTIONS);
+      const hint = (k) => {
+        const a = structuredClone(ACTIONS[k]);
+        const obj = applyBonus(k, { delta: structuredClone(a.delta), xp: a.xp, coins: a.coins });
+        // делаем короткий текст
+        const parts = [];
+        if (obj.delta.hunger) parts.push(`Сытость ${obj.delta.hunger>0?"+":""}${obj.delta.hunger}`);
+        if (obj.delta.happy)  parts.push(`Радость ${obj.delta.happy>0?"+":""}${obj.delta.happy}`);
+        if (obj.delta.clean)  parts.push(`Чистота ${obj.delta.clean>0?"+":""}${obj.delta.clean}`);
+        if (obj.delta.energy) parts.push(`Энергия ${obj.delta.energy>0?"+":""}${obj.delta.energy}`);
+        return `${parts.join(" • ")} • XP +${obj.xp} • 🪙 +${obj.coins}` + (eq ? " (с бонусом)" : "");
+      };
+
+      el("hint_feed").textContent  = hint("feed");
+      el("hint_walk").textContent  = hint("walk");
+      el("hint_groom").textContent = hint("groom");
+      el("hint_train").textContent = hint("train");
+      el("hint_rest").textContent  = hint("rest");
+      el("hint_treat").textContent = hint("treat");
+    }
 
     function render(){
       const s = state.stats;
@@ -737,13 +814,21 @@
       el('petTitle').textContent = state.dogName;
 
       el('saveMode').textContent = canCloud ? "Сохраняю в Telegram" : "Сохраняю на устройстве";
-      el('chip').textContent = canCloud ? "v1.3 • Telegram save" : "v1.3 • device save";
+      el('chip').textContent = canCloud ? "v2.0 • Telegram save" : "v2.0 • device save";
+
+      el('coinChip').textContent = `🪙 ${state.coins}`;
 
       const need = xpNeeded(state.level);
       el("lvl").textContent = `Уровень ${state.level}`;
       el("xptext").textContent = `${Math.round(state.xp)} / ${need} XP`;
       el("xpfill").style.width = clamp((state.xp / need) * 100) + "%";
 
+      const mood = computeMood();
+      el("mood").textContent = `Настроение: ${mood.text}`;
+      el("petDog").textContent = mood.emoji;
+
+      updateHints();
+      renderShop();
       renderAchievements();
 
       const list = el('history');
@@ -770,8 +855,12 @@
 
     window.doAction = async function(key){
       applyDecay();
-      const a = ACTIONS[key];
-      if (!a) return;
+
+      const a0 = ACTIONS[key];
+      if (!a0) return;
+
+      // копия + бонусы
+      const a = applyBonus(key, { delta: structuredClone(a0.delta), xp: a0.xp, coins: a0.coins });
 
       state.stats.hunger = clamp(state.stats.hunger + (a.delta.hunger || 0));
       state.stats.happy  = clamp(state.stats.happy  + (a.delta.happy  || 0));
@@ -780,11 +869,12 @@
 
       state.counts[key] = (state.counts[key] || 0) + 1;
 
-      addLog(a.emoji, a.title);
+      state.coins += a.coins;
+      addLog(a0.emoji, a0.title);
       addXP(a.xp);
 
       tg?.HapticFeedback?.impactOccurred?.("light");
-      toast(`${a.emoji} ${a.title}! +${a.xp}XP`);
+      toast(`${a0.emoji} ${a0.title}! +${a.xp}XP • 🪙+${a.coins}`);
 
       checkAchievements();
       await persist();
@@ -794,10 +884,13 @@
     window.petDog = async function(){
       applyDecay();
 
+      // погладить: чуть радости + XP + монетка
       state.stats.happy = clamp(state.stats.happy + 3);
       state.stats.energy = clamp(state.stats.energy + 1);
 
       state.counts.pet += 1;
+
+      state.coins += 1;
       addLog("🐶", "Погладил пёселя");
       addXP(4);
 
@@ -811,7 +904,7 @@
       setTimeout(()=>hearts.classList.remove('show'), 750);
 
       tg?.HapticFeedback?.impactOccurred?.("medium");
-      toast("💛 Ему приятно! +4XP");
+      toast("💛 Ему приятно! +4XP • 🪙+1");
 
       checkAchievements();
       await persist();
@@ -828,8 +921,42 @@
       toast("Имя обновил ✅");
     }
 
+    // Напоминалки: отправляем настройки БОТУ (bot.py ниже)
+    window.openReminders = async function(){
+      const r = state.reminders || { enabled:false, feed_h:6, walk_h:8, quiet_from:0, quiet_to:7 };
+
+      const enabled = confirm("Включить напоминалки? (ОК=включить, Отмена=выключить)");
+      r.enabled = enabled;
+
+      if (enabled){
+        const feed = prompt("Каждые сколько ЧАСОВ напоминать покормить? (например 6)", String(r.feed_h ?? 6));
+        const walk = prompt("Каждые сколько ЧАСОВ напоминать погулять? (например 8)", String(r.walk_h ?? 8));
+        const qf = prompt("Тихие часы С (0-23). Например 0", String(r.quiet_from ?? 0));
+        const qt = prompt("Тихие часы ДО (0-23). Например 7", String(r.quiet_to ?? 7));
+
+        r.feed_h = Math.max(1, Math.min(24, parseInt(feed||"6",10) || 6));
+        r.walk_h = Math.max(1, Math.min(24, parseInt(walk||"8",10) || 8));
+        r.quiet_from = Math.max(0, Math.min(23, parseInt(qf||"0",10) || 0));
+        r.quiet_to   = Math.max(0, Math.min(23, parseInt(qt||"7",10) || 7));
+      }
+
+      state.reminders = r;
+      addLog("⏰", r.enabled ? `Напоминалки включены (еда ${r.feed_h}ч, прогулка ${r.walk_h}ч)` : "Напоминалки выключены");
+
+      // отправляем боту
+      try{
+        tg?.sendData?.(JSON.stringify({ type:"reminders", reminders: r }));
+        toast("Отправил настройки боту ✅");
+      }catch{
+        toast("Не смог отправить боту 😕");
+      }
+
+      await persist();
+      render();
+    }
+
     window.resetAll = async function(){
-      if (!confirm("Сбросить всё? История, XP и достижения обнулятся.")) return;
+      if (!confirm("Сбросить всё? (статы/XP/монеты/магазин/достижения)")) return;
       state = structuredClone(DEFAULT);
       await persist();
       render();
@@ -838,9 +965,12 @@
 
     window.share = function(){
       const s = state.stats;
+      const eq = getEquipped();
       const msg =
 `🐶 ${state.dogName}
 ⭐ Уровень: ${state.level}
+🪙 Монеты: ${state.coins}
+🎽 Экипировка: ${eq ? eq.title : "—"}
 🍗 Сытость: ${Math.round(s.hunger)}%
 😊 Радость: ${Math.round(s.happy)}%
 🧼 Чистота: ${Math.round(s.clean)}%
@@ -858,8 +988,12 @@
       // миграция
       state.level ??= 1;
       state.xp ??= 0;
+      state.coins ??= 0;
+      state.owned ??= {};
+      state.equipped ??= null;
       state.unlocked ??= {};
       state.counts ??= { feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 };
+      state.reminders ??= { enabled:false, feed_h:6, walk_h:8, quiet_from:0, quiet_to:7 };
 
       applyDecay();
       checkAchievements();
