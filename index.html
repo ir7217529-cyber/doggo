@@ -28,10 +28,9 @@
       overflow-x:hidden;
     }
 
-    /* Фон лапки */
-    .bg{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:1; }
+    .bg{ position:fixed; inset:0; pointer-events:none; z-index:0; }
     .paw{
-      position:absolute; right:-40px; top: 22%;
+      position:absolute; right:-40px; top:22%;
       font-size:22px; opacity:0.12;
       animation: paw-drift 10s linear infinite;
     }
@@ -48,7 +47,6 @@
       z-index:2;
     }
 
-    /* Шапка */
     header{
       display:flex; align-items:flex-start; justify-content:space-between;
       gap:10px; margin-top:8px;
@@ -84,7 +82,7 @@
       backdrop-filter: blur(10px);
     }
 
-    /* Питомец + настроение */
+    /* Pet card */
     .pet-card{
       position:relative;
       padding: 12px;
@@ -99,12 +97,6 @@
     }
     .pet-title{ font-weight:900; font-size:14px; color:#fff; }
     .pet-hint{ font-size:12px; color:var(--muted); white-space:nowrap; }
-    .mood{
-      margin-top:6px;
-      font-size:12px;
-      color:var(--muted);
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
 
     /* XP */
     .level-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:6px; }
@@ -118,12 +110,53 @@
     }
     .xpfill{ height:100%; width:30%; border-radius:999px; background: rgba(255,255,255,0.85); transition: width 220ms ease; }
 
-    /* Собака */
-    .pet-zone{ display:flex; align-items:center; justify-content:center; padding: 6px 0 2px; }
+    /* Mood row (без человеческих смайлов) */
+    .moodrow{
+      margin-top:8px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      min-width:0;
+    }
+    .moodtext{
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      min-width:0;
+      flex:1;
+    }
+    .moodbadges{
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-shrink:0;
+    }
+    .badge{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.16);
+      border-radius:999px;
+      padding:4px 7px;
+      font-size:12px;
+      color:#fff;
+      opacity:0.9;
+      white-space:nowrap;
+    }
+
+    /* Dog display */
+    .pet-zone{ display:flex; align-items:center; justify-content:center; padding: 8px 0 2px; }
     .pet-btn{
       border:0; background:transparent; cursor:pointer;
       padding:6px; border-radius:999px; outline:none;
       -webkit-tap-highlight-color: transparent;
+    }
+    .dogwrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
     }
     .pet{
       font-size:88px; line-height:1;
@@ -131,6 +164,12 @@
       transform-origin: 50% 80%;
       animation: pet-idle 2.8s ease-in-out infinite;
       user-select:none;
+    }
+    .equip{
+      font-size:34px;
+      line-height:1;
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,0.45));
+      opacity:0.95;
     }
     @keyframes pet-idle{ 0%,100%{transform:translateY(0) rotate(-1.5deg)} 50%{transform:translateY(-6px) rotate(1.5deg)} }
     .pet.petted{ animation: pet-pet 520ms ease-out 1; }
@@ -158,7 +197,7 @@
       100%{opacity:0; transform:translate(-50%,-120%) scale(1.0)}
     }
 
-    /* Статы */
+    /* Stats */
     .stats{
       display:grid;
       grid-template-columns: minmax(0,1fr) minmax(0,1fr);
@@ -190,7 +229,7 @@
     }
     .fill{ height:100%; width:50%; border-radius:999px; background: rgba(255,255,255,0.85); transition: width 220ms ease; }
 
-    /* Действия (фикс колонок) */
+    /* Actions */
     .actions{
       display:grid;
       grid-template-columns: minmax(0,1fr) minmax(0,1fr);
@@ -244,7 +283,36 @@
     }
     .btn-mini:active{ transform: scale(0.98); }
 
-    /* Магазин */
+    /* Daily quests */
+    .quest{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.10);
+      border-radius:12px;
+      padding:10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      min-width:0;
+    }
+    .q-left{ min-width:0; flex:1; }
+    .q-title{ font-weight:900; font-size:13.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .q-desc{ margin-top:2px; color:var(--muted); font-size:11.5px; }
+    .q-right{ flex-shrink:0; display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+    .q-progress{ font-size:12px; color:#fff; opacity:0.9; }
+    .q-claim{
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,0.18);
+      color:#fff;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:12px;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .q-claim:disabled{ opacity:0.45; cursor:not-allowed; }
+
+    /* Shop */
     .shop-grid{
       display:grid;
       grid-template-columns: minmax(0,1fr) minmax(0,1fr);
@@ -281,7 +349,7 @@
     .btn-buy:active{ transform: scale(0.98); }
     .btn-buy.secondary{ color:var(--muted); }
 
-    /* Достижения */
+    /* Achievements */
     .ach-grid{
       display:grid;
       grid-template-columns: minmax(0,1fr) minmax(0,1fr);
@@ -306,7 +374,7 @@
     .ach-title{ font-size:13.5px; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .ach-desc{ font-size:11.5px; color:var(--muted); }
 
-    /* История */
+    /* History */
     .history{
       display:flex;
       flex-direction:column;
@@ -366,7 +434,7 @@
       </div>
       <div class="chip-row">
         <div class="chip" id="coinChip">🪙 0</div>
-        <div class="chip" id="chip">v2.0</div>
+        <div class="chip" id="chip">v2.1</div>
       </div>
     </header>
 
@@ -383,11 +451,17 @@
         </div>
         <div class="xpbar"><div class="xpfill" id="xpfill"></div></div>
 
-        <div class="mood" id="mood">Настроение: …</div>
+        <div class="moodrow">
+          <div class="moodtext" id="moodText">Настроение: …</div>
+          <div class="moodbadges" id="moodBadges"></div>
+        </div>
 
         <div class="pet-zone">
           <button class="pet-btn" onclick="petDog()" aria-label="Погладить собаку">
-            <div class="pet" id="petDog">🐶</div>
+            <div class="dogwrap">
+              <div class="pet" id="petDog">🐶</div>
+              <div class="equip" id="equipEmoji"> </div>
+            </div>
           </button>
         </div>
 
@@ -397,71 +471,41 @@
       </div>
 
       <div class="stats">
-        <div class="stat">
-          <div class="stat-top"><div class="stat-name">🍗 Сытость</div><div class="stat-val" id="v_hunger">—</div></div>
-          <div class="bar"><div class="fill" id="b_hunger"></div></div>
-        </div>
-        <div class="stat">
-          <div class="stat-top"><div class="stat-name">😊 Радость</div><div class="stat-val" id="v_happy">—</div></div>
-          <div class="bar"><div class="fill" id="b_happy"></div></div>
-        </div>
-        <div class="stat">
-          <div class="stat-top"><div class="stat-name">🧼 Чистота</div><div class="stat-val" id="v_clean">—</div></div>
-          <div class="bar"><div class="fill" id="b_clean"></div></div>
-        </div>
-        <div class="stat">
-          <div class="stat-top"><div class="stat-name">⚡ Энергия</div><div class="stat-val" id="v_energy">—</div></div>
-          <div class="bar"><div class="fill" id="b_energy"></div></div>
-        </div>
+        <div class="stat"><div class="stat-top"><div class="stat-name">🍗 Сытость</div><div class="stat-val" id="v_hunger">—</div></div><div class="bar"><div class="fill" id="b_hunger"></div></div></div>
+        <div class="stat"><div class="stat-top"><div class="stat-name">😊 Радость</div><div class="stat-val" id="v_happy">—</div></div><div class="bar"><div class="fill" id="b_happy"></div></div></div>
+        <div class="stat"><div class="stat-top"><div class="stat-name">🧼 Чистота</div><div class="stat-val" id="v_clean">—</div></div><div class="bar"><div class="fill" id="b_clean"></div></div></div>
+        <div class="stat"><div class="stat-top"><div class="stat-name">⚡ Энергия</div><div class="stat-val" id="v_energy">—</div></div><div class="bar"><div class="fill" id="b_energy"></div></div></div>
       </div>
 
       <div class="actions">
         <button class="action" onclick="doAction('feed')">
-          <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🍗</span><span class="a-text">Покормить</span></div>
-            <div class="a-plus">＋</div>
-          </div>
-          <span class="a-hint" id="hint_feed">Сытость +25 • Радость +6 • XP +12 • 🪙 +3</span>
+          <div class="a-top"><div class="a-title"><span class="a-emoji">🍗</span><span class="a-text">Покормить</span></div><div class="a-plus">＋</div></div>
+          <span class="a-hint" id="hint_feed">…</span>
         </button>
 
         <button class="action" onclick="doAction('walk')">
-          <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🦮</span><span class="a-text">Погулять</span></div>
-            <div class="a-plus">＋</div>
-          </div>
-          <span class="a-hint" id="hint_walk">Радость +18 • Энергия −10 • XP +14 • 🪙 +4</span>
+          <div class="a-top"><div class="a-title"><span class="a-emoji">🦮</span><span class="a-text">Погулять</span></div><div class="a-plus">＋</div></div>
+          <span class="a-hint" id="hint_walk">…</span>
         </button>
 
         <button class="action" onclick="doAction('groom')">
-          <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🧼</span><span class="a-text">Вычесать</span></div>
-            <div class="a-plus">＋</div>
-          </div>
-          <span class="a-hint" id="hint_groom">Чистота +25 • Радость +4 • XP +10 • 🪙 +2</span>
+          <div class="a-top"><div class="a-title"><span class="a-emoji">🧼</span><span class="a-text">Вычесать</span></div><div class="a-plus">＋</div></div>
+          <span class="a-hint" id="hint_groom">…</span>
         </button>
 
         <button class="action" onclick="doAction('train')">
-          <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🎾</span><span class="a-text">Тренировка</span></div>
-            <div class="a-plus">＋</div>
-          </div>
-          <span class="a-hint" id="hint_train">Радость +10 • Энергия −18 • XP +18 • 🪙 +5</span>
+          <div class="a-top"><div class="a-title"><span class="a-emoji">🎾</span><span class="a-text">Тренировка</span></div><div class="a-plus">＋</div></div>
+          <span class="a-hint" id="hint_train">…</span>
         </button>
 
         <button class="action" onclick="doAction('rest')">
-          <div class="a-top">
-            <div class="a-title"><span class="a-emoji">😴</span><span class="a-text">Отдохнуть</span></div>
-            <div class="a-plus">＋</div>
-          </div>
-          <span class="a-hint" id="hint_rest">Энергия +28 • XP +8 • 🪙 +1</span>
+          <div class="a-top"><div class="a-title"><span class="a-emoji">😴</span><span class="a-text">Отдохнуть</span></div><div class="a-plus">＋</div></div>
+          <span class="a-hint" id="hint_rest">…</span>
         </button>
 
         <button class="action" onclick="doAction('treat')">
-          <div class="a-top">
-            <div class="a-title"><span class="a-emoji">🦴</span><span class="a-text">Лакомство</span></div>
-            <div class="a-plus">＋</div>
-          </div>
-          <span class="a-hint" id="hint_treat">Радость +16 • Сытость +8 • XP +9 • 🪙 +2</span>
+          <div class="a-top"><div class="a-title"><span class="a-emoji">🦴</span><span class="a-text">Лакомство</span></div><div class="a-plus">＋</div></div>
+          <span class="a-hint" id="hint_treat">…</span>
         </button>
       </div>
 
@@ -473,7 +517,16 @@
       </div>
     </div>
 
-    <!-- Магазин -->
+    <!-- Daily quests -->
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+        <div style="font-weight:900;">Ежедневки</div>
+        <div style="color:var(--muted);font-size:12px;" id="dailyInfo">—</div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;" id="dailyList"></div>
+    </div>
+
+    <!-- Shop -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">Магазин</div>
@@ -482,7 +535,7 @@
       <div class="shop-grid" id="shopGrid"></div>
     </div>
 
-    <!-- Достижения -->
+    <!-- Achievements -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">Достижения</div>
@@ -491,7 +544,7 @@
       <div class="ach-grid" id="achGrid"></div>
     </div>
 
-    <!-- История -->
+    <!-- History -->
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
         <div style="font-weight:900;">История</div>
@@ -519,7 +572,7 @@
     }
 
     // Storage
-    const KEY = 'golden_care_state_v2_0';
+    const KEY = 'golden_care_state_v2_1';
     const canCloud = !!(tg && tg.CloudStorage && typeof tg.CloudStorage.getItem === 'function');
 
     function loadStateLocal(){ const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }
@@ -557,7 +610,7 @@
       }
     }
 
-    // Shop items (дают бонусы)
+    // Shop items
     const SHOP = [
       { id:"collar", ico:"🧿", title:"Ошейник", price:25, desc:"Бонус: прогулка даёт +2 XP", bonus:{ walk_xp:+2 } },
       { id:"ball",   ico:"⚽", title:"Мячик",   price:35, desc:"Бонус: тренировка даёт +3 радости", bonus:{ train_happy:+3 } },
@@ -565,29 +618,118 @@
       { id:"brush",  ico:"🪮", title:"Щётка",   price:28, desc:"Бонус: вычёсывание даёт +3 чистоты", bonus:{ groom_clean:+3 } },
       { id:"blanket",ico:"🧸", title:"Плед",    price:20, desc:"Бонус: отдых даёт +4 энергии", bonus:{ rest_energy:+4 } },
     ];
-
-    function getEquipped(){
-      if (!state.equipped) return null;
-      return SHOP.find(i=>i.id===state.equipped) || null;
-    }
+    function getEquipped(){ return state.equipped ? (SHOP.find(i=>i.id===state.equipped) || null) : null; }
 
     function applyBonus(actionKey, base){
-      // base: {delta:{...}, xp, coins}
       const eq = getEquipped();
       if (!eq) return base;
-
       const b = eq.bonus || {};
-
-      // XP bonuses
-      if (actionKey === "walk" && b.walk_xp) base.xp += b.walk_xp;
-
-      // stat bonuses
-      if (actionKey === "train" && b.train_happy) base.delta.happy += b.train_happy;
-      if (actionKey === "feed"  && b.feed_hunger) base.delta.hunger += b.feed_hunger;
-      if (actionKey === "groom" && b.groom_clean) base.delta.clean += b.groom_clean;
-      if (actionKey === "rest"  && b.rest_energy) base.delta.energy += b.rest_energy;
-
+      if (actionKey === "walk"  && b.walk_xp)      base.xp += b.walk_xp;
+      if (actionKey === "train" && b.train_happy)  base.delta.happy += b.train_happy;
+      if (actionKey === "feed"  && b.feed_hunger)  base.delta.hunger += b.feed_hunger;
+      if (actionKey === "groom" && b.groom_clean)  base.delta.clean += b.groom_clean;
+      if (actionKey === "rest"  && b.rest_energy)  base.delta.energy += b.rest_energy;
       return base;
+    }
+
+    // Daily quests
+    const QUEST_POOL = [
+      { id:"q_feed2",  title:"Сытный день",     desc:"Покорми 2 раза", type:"feed",  need:2,  reward:{ coins:6, xp:10 } },
+      { id:"q_walk2",  title:"Свежий воздух",   desc:"Погуляй 2 раза", type:"walk",  need:2,  reward:{ coins:8, xp:12 } },
+      { id:"q_train1", title:"Дрессура",        desc:"Тренировка 1 раз", type:"train", need:1, reward:{ coins:7, xp:14 } },
+      { id:"q_groom1", title:"Красавчик",       desc:"Вычесать 1 раз", type:"groom", need:1, reward:{ coins:6, xp:10 } },
+      { id:"q_pet5",   title:"Любовь",          desc:"Погладь 5 раз",  type:"pet",   need:5,  reward:{ coins:5, xp:10 } },
+      { id:"q_rest1",  title:"Режим сна",       desc:"Отдохнуть 1 раз", type:"rest", need:1,  reward:{ coins:4, xp:8 } },
+    ];
+
+    function todayKey(){
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth()+1).padStart(2,'0');
+      const da = String(d.getDate()).padStart(2,'0');
+      return `${y}-${m}-${da}`;
+    }
+
+    function pickDaily(){
+      // 3 уникальных задания
+      const pool = [...QUEST_POOL];
+      const chosen = [];
+      while (chosen.length < 3 && pool.length){
+        const idx = Math.floor(Math.random()*pool.length);
+        chosen.push(pool.splice(idx,1)[0]);
+      }
+      return chosen.map(q => ({
+        id:q.id, title:q.title, desc:q.desc, type:q.type, need:q.need,
+        reward:q.reward, claimed:false
+      }));
+    }
+
+    function ensureDaily(){
+      const tk = todayKey();
+      if (!state.daily || state.daily.dayKey !== tk){
+        state.daily = { dayKey: tk, quests: pickDaily() };
+        addLog("📅", "Новые ежедневки!");
+      }
+    }
+
+    function questProgress(q){
+      // прогресс на основе сегодняшних счётчиков
+      const c = state.dailyCounts || {};
+      return Math.min(q.need, (c[q.type] || 0));
+    }
+
+    function renderDaily(){
+      ensureDaily();
+      const list = el("dailyList");
+      const tk = state.daily.dayKey;
+      el("dailyInfo").textContent = `Сегодня: ${tk}`;
+
+      list.innerHTML = "";
+      state.daily.quests.forEach((q, idx) => {
+        const prog = questProgress(q);
+        const ready = prog >= q.need && !q.claimed;
+
+        const div = document.createElement("div");
+        div.className = "quest";
+        div.innerHTML = `
+          <div class="q-left">
+            <div class="q-title">🎯 ${q.title}</div>
+            <div class="q-desc">${q.desc} • Награда: 🪙${q.reward.coins} + XP${q.reward.xp}</div>
+          </div>
+          <div class="q-right">
+            <div class="q-progress">${prog}/${q.need}</div>
+            <button class="q-claim" ${ready ? "" : "disabled"} data-i="${idx}">
+              ${q.claimed ? "Получено" : (ready ? "Забрать" : "Ждёт")}
+            </button>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+
+      list.querySelectorAll("button[data-i]").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          const i = parseInt(e.currentTarget.getAttribute("data-i"),10);
+          await claimQuest(i);
+        });
+      });
+    }
+
+    async function claimQuest(i){
+      const q = state.daily.quests[i];
+      if (!q || q.claimed) return;
+      const prog = questProgress(q);
+      if (prog < q.need) return;
+
+      q.claimed = true;
+      state.coins += q.reward.coins;
+      addXP(q.reward.xp);
+      addLog("🎁", `Ежедневка: ${q.title} (+🪙${q.reward.coins}, +XP${q.reward.xp})`);
+      tg?.HapticFeedback?.notificationOccurred?.("success");
+      toast("Награда получена 🎁");
+
+      checkAchievements();
+      await persist();
+      render();
     }
 
     // Achievements
@@ -597,10 +739,10 @@
       { id:"coins_50", ico:"🪙", title:"Копилка", desc:"Накопи 50 монет" },
       { id:"buy_1", ico:"🛍️", title:"Первая покупка", desc:"Купи 1 предмет" },
       { id:"equip_1", ico:"🎽", title:"Экипировка", desc:"Экипируй предмет" },
+      { id:"daily_1", ico:"📅", title:"Дейлики", desc:"Забери 1 ежедневку" },
       { id:"level_5", ico:"⭐", title:"Пятый уровень", desc:"Достигни уровня 5" },
       { id:"full_happy", ico:"😁", title:"Счастливчик", desc:"Подними радость до 100%" },
     ];
-
     function unlock(id){
       if (state.unlocked[id]) return;
       state.unlocked[id] = true;
@@ -608,21 +750,19 @@
       toast("🏆 Достижение!");
       addLog("🏆", `Достижение: ${ACHS.find(a=>a.id===id)?.title || id}`);
     }
-
     function checkAchievements(){
       const c = state.counts;
       const s = state.stats;
       const anyAction = c.feed + c.walk + c.groom + c.train + c.rest + c.treat + c.pet;
-
       if (anyAction >= 1) unlock("first_action");
       if (c.pet >= 10) unlock("pet_10");
       if (state.coins >= 50) unlock("coins_50");
       if (Object.keys(state.owned || {}).length >= 1) unlock("buy_1");
       if (state.equipped) unlock("equip_1");
+      if (state.daily && state.daily.quests && state.daily.quests.some(x=>x.claimed)) unlock("daily_1");
       if (state.level >= 5) unlock("level_5");
       if (Math.round(s.happy) >= 100) unlock("full_happy");
     }
-
     function renderAchievements(){
       const grid = el("achGrid");
       grid.innerHTML = "";
@@ -640,7 +780,7 @@
       });
     }
 
-    // Game state
+    // State
     const DEFAULT = {
       dogName: "Голден",
       stats: { hunger: 78, happy: 70, clean: 65, energy: 72 },
@@ -649,26 +789,25 @@
       level: 1,
       xp: 0,
       coins: 0,
-      owned: {},         // { itemId: true }
-      equipped: null,    // itemId
+      owned: {},
+      equipped: null,
       unlocked: {},
       counts: { feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 },
-      reminders: { enabled:false, feed_h:6, walk_h:8, quiet_from:0, quiet_to:7 }
+      reminders: { enabled:false, feed_h:6, walk_h:8, quiet_from:0, quiet_to:7 },
+      daily: null,
+      dailyCounts: null
     };
-
     let state = structuredClone(DEFAULT);
 
     function addLog(emoji, title){
       state.history.unshift({ emoji, title, ts: now() });
-      state.history = state.history.slice(0, 70);
+      state.history = state.history.slice(0, 80);
     }
 
     function applyDecay(){
       const t = now();
       const dtMin = Math.max(0, (t - (state.lastTick || t)) / 60000);
       state.lastTick = t;
-
-      // мягкий спад
       state.stats.hunger = clamp(state.stats.hunger - dtMin * 0.06);
       state.stats.happy  = clamp(state.stats.happy  - dtMin * 0.04);
       state.stats.clean  = clamp(state.stats.clean  - dtMin * 0.03);
@@ -684,33 +823,58 @@
       treat: { emoji:"🦴", title:"Лакомство",  xp:9,  coins:2, delta:{ hunger:+8,  happy:+16, clean:0,   energy:0 } },
     };
 
-    function computeMood(){
+    function moodBadges(){
+      const s = state.stats;
+      const badges = [];
+      if (s.hunger < 25) badges.push("🍗 голод");
+      if (s.energy < 25) badges.push("⚡ устал");
+      if (s.clean < 25)  badges.push("🧼 грязный");
+      if (s.happy < 25)  badges.push("💛 грустит");
+      if (!badges.length && s.happy > 85 && s.hunger > 60) badges.push("✨ кайфует");
+      return badges.slice(0,3);
+    }
+
+    function moodText(){
       const s = state.stats;
       const minStat = Math.min(s.hunger, s.happy, s.clean, s.energy);
+      if (minStat < 15) return "Плохо… срочно нужен уход 😭";
+      if (s.hunger < 25) return "Голодненький… покорми меня 🍗";
+      if (s.energy < 25) return "Устал… хочу отдыхать 😴";
+      if (s.clean < 25) return "Я грязный… вычеши меня 🧼";
+      if (s.happy > 85 && s.hunger > 60) return "Счастливый пёс! 💛";
+      return "Нормально себя чувствует 🙂";
+    }
 
-      let mood = { emoji:"🐶", text:"Нормально себя чувствует 🙂" };
-
-      if (minStat < 15) mood = { emoji:"😢", text:"Плохо… срочно нужен уход 😭" };
-      else if (s.hunger < 25) mood = { emoji:"🥺", text:"Голодненький… покорми меня 🍗" };
-      else if (s.energy < 25) mood = { emoji:"😴", text:"Устал… хочу отдыхать 😴" };
-      else if (s.clean < 25) mood = { emoji:"🤢", text:"Я грязный… вычеши меня 🧼" };
-      else if (s.happy > 85 && s.hunger > 60) mood = { emoji:"😁", text:"Счастливый пёс! 💛" };
-
-      return mood;
+    function updateHints(){
+      const eq = getEquipped();
+      const mk = (k) => {
+        const a0 = ACTIONS[k];
+        const a = applyBonus(k, { delta: structuredClone(a0.delta), xp: a0.xp, coins: a0.coins });
+        const parts = [];
+        if (a.delta.hunger) parts.push(`Сытость ${a.delta.hunger>0?"+":""}${a.delta.hunger}`);
+        if (a.delta.happy)  parts.push(`Радость ${a.delta.happy>0?"+":""}${a.delta.happy}`);
+        if (a.delta.clean)  parts.push(`Чистота ${a.delta.clean>0?"+":""}${a.delta.clean}`);
+        if (a.delta.energy) parts.push(`Энергия ${a.delta.energy>0?"+":""}${a.delta.energy}`);
+        return `${parts.join(" • ")} • XP +${a.xp} • 🪙 +${a.coins}` + (eq ? " (с бонусом)" : "");
+      };
+      el("hint_feed").textContent  = mk("feed");
+      el("hint_walk").textContent  = mk("walk");
+      el("hint_groom").textContent = mk("groom");
+      el("hint_train").textContent = mk("train");
+      el("hint_rest").textContent  = mk("rest");
+      el("hint_treat").textContent = mk("treat");
     }
 
     function renderShop(){
       const grid = el("shopGrid");
       grid.innerHTML = "";
-
       const eq = getEquipped();
       el("equipInfo").textContent = "Экипировано: " + (eq ? `${eq.ico} ${eq.title}` : "—");
 
       SHOP.forEach(item => {
         const owned = !!state.owned[item.id];
         const equipped = state.equipped === item.id;
-
-        const btnText = equipped ? "Снято" : (owned ? "Экипировать" : `Купить`);
+        const btnText = equipped ? "Снять" : (owned ? "Экипировать" : `Купить`);
         const btnClass = owned ? "btn-buy secondary" : "btn-buy";
         const priceText = owned ? (equipped ? "Экипировано" : "Куплено") : `Цена: 🪙 ${item.price}`;
 
@@ -772,28 +936,10 @@
       render();
     }
 
-    function updateHints(){
-      // чисто чтобы игрок видел, что бонусы работают
-      const eq = getEquipped();
-      const base = structuredClone(ACTIONS);
-      const hint = (k) => {
-        const a = structuredClone(ACTIONS[k]);
-        const obj = applyBonus(k, { delta: structuredClone(a.delta), xp: a.xp, coins: a.coins });
-        // делаем короткий текст
-        const parts = [];
-        if (obj.delta.hunger) parts.push(`Сытость ${obj.delta.hunger>0?"+":""}${obj.delta.hunger}`);
-        if (obj.delta.happy)  parts.push(`Радость ${obj.delta.happy>0?"+":""}${obj.delta.happy}`);
-        if (obj.delta.clean)  parts.push(`Чистота ${obj.delta.clean>0?"+":""}${obj.delta.clean}`);
-        if (obj.delta.energy) parts.push(`Энергия ${obj.delta.energy>0?"+":""}${obj.delta.energy}`);
-        return `${parts.join(" • ")} • XP +${obj.xp} • 🪙 +${obj.coins}` + (eq ? " (с бонусом)" : "");
-      };
-
-      el("hint_feed").textContent  = hint("feed");
-      el("hint_walk").textContent  = hint("walk");
-      el("hint_groom").textContent = hint("groom");
-      el("hint_train").textContent = hint("train");
-      el("hint_rest").textContent  = hint("rest");
-      el("hint_treat").textContent = hint("treat");
+    function ensureDailyCounts(){
+      if (!state.dailyCounts || state.dailyCounts.dayKey !== todayKey()){
+        state.dailyCounts = { dayKey: todayKey(), feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 };
+      }
     }
 
     function render(){
@@ -814,8 +960,7 @@
       el('petTitle').textContent = state.dogName;
 
       el('saveMode').textContent = canCloud ? "Сохраняю в Telegram" : "Сохраняю на устройстве";
-      el('chip').textContent = canCloud ? "v2.0 • Telegram save" : "v2.0 • device save";
-
+      el('chip').textContent = canCloud ? "v2.1 • Telegram save" : "v2.1 • device save";
       el('coinChip').textContent = `🪙 ${state.coins}`;
 
       const need = xpNeeded(state.level);
@@ -823,10 +968,26 @@
       el("xptext").textContent = `${Math.round(state.xp)} / ${need} XP`;
       el("xpfill").style.width = clamp((state.xp / need) * 100) + "%";
 
-      const mood = computeMood();
-      el("mood").textContent = `Настроение: ${mood.text}`;
-      el("petDog").textContent = mood.emoji;
+      // dog always 🐶
+      el("petDog").textContent = "🐶";
+      const eq = getEquipped();
+      el("equipEmoji").textContent = eq ? eq.ico : "";
 
+      // mood
+      el("moodText").textContent = `Настроение: ${moodText()}`;
+      const badges = moodBadges();
+      const wrap = el("moodBadges");
+      wrap.innerHTML = "";
+      badges.forEach(b => {
+        const span = document.createElement("span");
+        span.className = "badge";
+        span.textContent = b;
+        wrap.appendChild(span);
+      });
+
+      ensureDaily();
+      ensureDailyCounts();
+      renderDaily();
       updateHints();
       renderShop();
       renderAchievements();
@@ -855,11 +1016,12 @@
 
     window.doAction = async function(key){
       applyDecay();
+      ensureDaily();
+      ensureDailyCounts();
 
       const a0 = ACTIONS[key];
       if (!a0) return;
 
-      // копия + бонусы
       const a = applyBonus(key, { delta: structuredClone(a0.delta), xp: a0.xp, coins: a0.coins });
 
       state.stats.hunger = clamp(state.stats.hunger + (a.delta.hunger || 0));
@@ -868,6 +1030,9 @@
       state.stats.energy = clamp(state.stats.energy + (a.delta.energy || 0));
 
       state.counts[key] = (state.counts[key] || 0) + 1;
+
+      // daily progress
+      state.dailyCounts[key] = (state.dailyCounts[key] || 0) + 1;
 
       state.coins += a.coins;
       addLog(a0.emoji, a0.title);
@@ -883,12 +1048,16 @@
 
     window.petDog = async function(){
       applyDecay();
+      ensureDaily();
+      ensureDailyCounts();
 
-      // погладить: чуть радости + XP + монетка
       state.stats.happy = clamp(state.stats.happy + 3);
       state.stats.energy = clamp(state.stats.energy + 1);
 
       state.counts.pet += 1;
+
+      // daily progress
+      state.dailyCounts.pet = (state.dailyCounts.pet || 0) + 1;
 
       state.coins += 1;
       addLog("🐶", "Погладил пёселя");
@@ -921,7 +1090,7 @@
       toast("Имя обновил ✅");
     }
 
-    // Напоминалки: отправляем настройки БОТУ (bot.py ниже)
+    // Reminders -> bot (bot.py у тебя уже есть)
     window.openReminders = async function(){
       const r = state.reminders || { enabled:false, feed_h:6, walk_h:8, quiet_from:0, quiet_to:7 };
 
@@ -943,7 +1112,6 @@
       state.reminders = r;
       addLog("⏰", r.enabled ? `Напоминалки включены (еда ${r.feed_h}ч, прогулка ${r.walk_h}ч)` : "Напоминалки выключены");
 
-      // отправляем боту
       try{
         tg?.sendData?.(JSON.stringify({ type:"reminders", reminders: r }));
         toast("Отправил настройки боту ✅");
@@ -956,7 +1124,7 @@
     }
 
     window.resetAll = async function(){
-      if (!confirm("Сбросить всё? (статы/XP/монеты/магазин/достижения)")) return;
+      if (!confirm("Сбросить всё? (статы/XP/монеты/магазин/достижения/дейлики)")) return;
       state = structuredClone(DEFAULT);
       await persist();
       render();
@@ -994,14 +1162,21 @@
       state.unlocked ??= {};
       state.counts ??= { feed:0, walk:0, groom:0, train:0, rest:0, treat:0, pet:0 };
       state.reminders ??= { enabled:false, feed_h:6, walk_h:8, quiet_from:0, quiet_to:7 };
+      state.daily ??= null;
+      state.dailyCounts ??= null;
 
       applyDecay();
+      ensureDaily();
+      ensureDailyCounts();
       checkAchievements();
+
       await persist();
       render();
 
       setInterval(async () => {
         applyDecay();
+        ensureDaily();
+        ensureDailyCounts();
         checkAchievements();
         await persist();
         render();
@@ -1012,6 +1187,3 @@
   </script>
 </body>
 </html>
-
-
-
